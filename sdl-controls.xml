@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<emulation version="1">
+<key x="10" y="180" width="20" height="15" sym="33" scancode="33"/>
+<key x="10" y="200" width="20" height="15" sym="34" scancode="34"/>
+<key x="0"  y="185" width="20" height="15" sym="35" scancode="35"/>
+<key x="25" y="185" width="20" height="15" sym="36" scancode="36"/>
+
+<key x="100" y="195" width="25" height="15" sym="9" scancode="9"/>
+<key x="140" y="195" width="25" height="15" sym="13" scancode="13"/>
+
+<key x="190" y="195" width="25" height="25" sym="40" scancode="40"/>
+<key x="225" y="195" width="25" height="25" sym="42" scancode="42"/>
+
+<key x="0" y="0" width="50" height="50" sym="."/>
+</emulation>
