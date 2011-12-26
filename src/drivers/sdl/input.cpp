@@ -411,6 +411,14 @@ KeyboardCommands()
             return;
         }
     }
+
+#ifdef _QNXNTO__
+    if(g_keyState(SDLK_EXCLAIM) ) // ! sym=33 triggers loader
+    {
+      fprintf(stderr"TODO: playbook loader cmd\n");
+      // HotKeyLoad()
+    }
+#endif
 	
 	#if SDL_VERSION_ATLEAST(1, 3, 0)
 	if(g_keyState[SDL_GetScancodeFromKey(SDLK_LSHIFT)] || g_keyState[SDL_GetScancodeFromKey(SDLK_RSHIFT)])
