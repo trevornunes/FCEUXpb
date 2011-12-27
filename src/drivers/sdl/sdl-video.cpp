@@ -199,8 +199,11 @@ InitVideo(FCEUGI *gi)
     }
     s_inited = 1;
 
+
+#ifndef __QNXNTO__
     // shows the cursor within the display window
-    SDL_ShowCursor(1);
+   SDL_ShowCursor(1);
+#endif
 
     // determine if we can allocate the display on the video card
     vinf = SDL_GetVideoInfo();

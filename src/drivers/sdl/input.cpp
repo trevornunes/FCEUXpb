@@ -48,11 +48,65 @@ using namespace std;
 #endif
 #endif
 
+#ifdef __QNXNTO__
+#include <dirent.h>
+#endif
 
 /** GLOBALS **/
 int NoWaiting=1;
 extern Config *g_config;
 extern bool bindSavestate, frameAdvanceLagSkip, lagCounterDisplay;
+
+
+
+
+
+vector<string> GetRomDirListing( const char *dpath )
+{
+ vector<string> vsList;
+
+#ifdef __QNXNTO__
+	DIR* dirp;
+	struct dirent* direntp;
+#endif
+
+if(!dpath)
+{
+    fprintf(stderr,"dpath is null.\n");
+	return vsList;
+}
+
+#ifdef __QNXNTO__
+
+  dirp = opendir( "/accounts/1000/shared/misc/roms/nes" );
+  if( dirp != NULL )
+  {
+	 for(;;)
+	 {
+		direntp = readdir( dirp );
+		if( direntp == NULL )
+		  break;
+
+		// fprintf(stderr,"FILE: '%s' \n", direntp->d_name);
+		// FCEUI_DispMessage(direntp->d_name,0);
+		if (direntp->d_name == ".")
+			continue;
+
+		if (direntp->d_name == "..")
+			continue;
+
+  	    vsList.push_back(direntp->d_name);
+	 }
+  }
+  else
+  {
+	fprintf(stderr,"dirp is NULL ...\n");
+  }
+
+#endif
+ //fprintf(stderr,"number of files %d\n", vsList.size() )
+return vsList;
+}
 
 
 /* UsrInputType[] is user-specified.  InputType[] is current
@@ -393,12 +447,6 @@ KeyboardCommands()
 	#endif
 
 
-    if( g_keyState[SDLK_ENTER] )
-    {
-     fprintf(stderr,"KeyboardCommands: ENTER key hit\n");
-    }
-
-
     // check if the family keyboard is enabled
     if(InputType[2] == SIFC_FKB) {
         if(keyonly(SCROLLLOCK)) {
@@ -413,10 +461,17 @@ KeyboardCommands()
     }
 
 #ifdef _QNXNTO__
-    if(g_keyState(SDLK_EXCLAIM) ) // ! sym=33 triggers loader
+    if(_keyonly(Hotkeys[HK_ROM_NAV])) {
     {
-      fprintf(stderr"TODO: playbook loader cmd\n");
-      // HotKeyLoad()
+
+      vector<string> vecList;
+      fprintf(stderr"KeyboardCommand: ROM NAVIGATOR\n");
+      FCEUI_ToggleEmulationPause();
+      vecList = GetRomDirListing("/accounts/1000/shared/misc/roms/nes");
+      for(int i =0; i < vecList.end(); i = 0)
+      {
+         FCEUI_DispMessage(vecList[i],0);
+      }
     }
 #endif
 	
@@ -630,7 +685,40 @@ KeyboardCommands()
     }
     
     if(_keyonly(Hotkeys[HK_LAG_COUNTER_DISPLAY])) {
-        lagCounterDisplay ^= 1;
+#ifndef __QNXNTO__
+    	lagCounterDisplay ^= 1;
+#else
+    	static int gameIndex;
+    	static int keyHit = 0;
+
+    	vector<string> vecList;
+        bool paused = FCEUI_EmulationPaused();
+    	 if(!paused)
+    	    FCEUI_ToggleEmulationPause();
+
+    	fprintf(stderr,"KeyboardCommand: ROM NAVIGATOR\n");
+    	if(keyHit++ > 1)
+    	{
+    	   keyHit = 2;
+    	   return;
+    	}
+
+        vecList = GetRomDirListing("/accounts/1000/shared/misc/roms/nes");
+        string baseDir ="/accounts/1000/shared/misc/roms/nes/";
+
+        if(gameIndex++ > vecList.size())
+        	gameIndex = 0;
+        baseDir = baseDir + vecList[gameIndex];
+
+       // FCEUI_DispMessage( (char*)vecList[gameIndex].c_str(), 0);
+
+        FCEUI_CloseGame();
+        fprintf(stderr,"attempting to LoadGame '%s", baseDir.c_str());
+
+       // shutdown and restart ...
+        LoadGame( baseDir.c_str() );
+        keyHit = 0;
+#endif
     }
     
     if (_keyonly(Hotkeys[HK_TOGGLE_SUBTITLE])) {

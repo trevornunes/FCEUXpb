@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <emulation version="1">
-<key x="0" y="168" width="40" height="15" sym="273" scancode="273"/>
-<key x="0" y="200" width="40" height="15" sym="274" scancode="274"/>
-<key x="0" y="185" width="20" height="15" sym="276" scancode="276"/>
-<key x="22" y="185" width="20" height="15" sym="275" scancode="275"/>
+<key x="0" y="158" width="80" height="25" sym="273" scancode="273"/>
+<key x="0" y="190" width="80" height="25" sym="274" scancode="274"/>
+<key x="0" y="180" width="40" height="15" sym="276" scancode="276"/>
+<key x="40" y="180" width="40" height="15" sym="275" scancode="275"/>
 
-<key x="80" y="200" width="50" height="15" sym="115" scancode="115"/>
-<key x="130" y="200" width="50" height="15" sym="13" scancode="13"/>
+<key x="110" y="200" width="30" height="15" sym="115" scancode="115" image="select.png"/>
+<key x="140" y="200" width="30" height="15" sym="13" scancode="13" image="start.png" />
 
-<key x="198" y="195" width="25" height="25" sym="102" scancode="102"/>
-<key x="228" y="195" width="25" height="25" sym="100" scancode="100"/>
+<key x="195" y="165" width="25" height="40" sym="102" scancode="102" image="A.png" />
+<key x="225" y="165" width="25" height="40" sym="100" scancode="100" image="B.png" />
 
-<key x="0" y="0" width="15" height="15" sym="48"/>
-<key x="20" y="0" width="15" height="15" sym="33"/>
-
+<key x="0" y="0" width="20" height="15" sym="48" scancode="254"/>
 
 </emulation>

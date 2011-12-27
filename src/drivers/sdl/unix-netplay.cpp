@@ -111,6 +111,7 @@ FCEUD_NetworkConnect(void)
 
     // only initialize if remote server is specified
     if(!server.size()) {
+    	fprintf(stderr,"remote server not configured, network support disabled.\n");
         return 0;
     }
 

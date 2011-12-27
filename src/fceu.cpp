@@ -74,6 +74,10 @@
 #include "drivers/sdl/sdl.h"
 #endif
 
+#ifdef __QNXNTO__
+#include <dirent.h>  // any unix, linux system should have this
+#endif
+
 using namespace std;
 
 int AFon = 1, AFoff = 1, AutoFireOffset = 0; //For keeping track of autofire settings
@@ -1184,3 +1188,6 @@ uint8 FCEU_ReadRomByte(uint32 i) {
 	if(i < 16+PRGsize[0]+CHRsize[0])return CHRptr[0][i-16-PRGsize[0]];
 	return 0;
 }
+
+
+

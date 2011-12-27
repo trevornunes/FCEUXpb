@@ -187,12 +187,38 @@ void FCEUD_Message(char *s)
  */
 int LoadGame(const char *path)
 {
+#ifndef __QNXNTO__
 	CloseGame();
-	if(!FCEUI_LoadGame(path, 1)) {
-		fprintf(stderr,"LoadGame: error loading, trying misc/roms/nes/game.nes \n");
-		if(! FCEUI_LoadGame("/accounts/1000/shared/misc/roms/nes/game.nes",1))
-	    	return 0;
+#endif
+
+	if(path)
+	{
+	  if(!FCEUI_LoadGame(path, 1))
+	  {
+	      fprintf(stderr,"LoadGame: error loading '%s'", path);
+#ifndef __QNXNTO__
+	      return 0;
+#endif
+
+	  }
 	}
+	else
+	{
+#ifndef __QNXNTO__
+		fprintf(stderr,"LoadGame: path is NULL");
+		return 0;
+#endif
+	}
+
+#ifdef __QNXNTO__
+	if(! FCEUI_LoadGame("/accounts/1000/shared/misc/roms/nes/game.nes",1))
+	{
+	    fprintf(stderr,"LoadGame: default game.nes not present/failed to load.\n");
+		return 0;
+	}
+#endif
+
+
 	ParseGIInput(GameInfo);
 	RefreshThrottleFPS();
 
@@ -221,7 +247,6 @@ int LoadGame(const char *path)
 	isloaded = 1;
 
 	FCEUD_NetworkConnect();
-	printf("ok..\n");
 	return 1;
 }
 
@@ -501,6 +526,10 @@ void FCEUD_TraceInstruction() {
 }
 
 
+#ifdef __QNXNTO__
+char *g_rom_default_game = "/accounts/1000/shared/roms/nes/game.nes";
+#endif
+
 /**
  * The main loop for the SDL.
  */
@@ -518,6 +547,16 @@ int main(int argc, char *argv[])
                 return 0;
             }
 	}
+
+#ifdef __QNXNTO__
+	if(!argv[1])
+	{
+	  fprintf(stderr,"no args, defaulting ...\n");
+	  argc = 1;
+	  argv[1] = g_rom_default_game;
+	}
+#endif
+
 
 	int error, frameskip;
 
@@ -557,6 +596,10 @@ int main(int argc, char *argv[])
 	}
 	
 	int romIndex = g_config->parse(argc, argv);
+
+#ifdef __QNXNTO__
+	romIndex = 1;
+#endif
 
 	// This is here so that a default fceux.cfg will be created on first
 	// run, even without a valid ROM to play.
@@ -707,11 +750,15 @@ int main(int argc, char *argv[])
 	// if we're not compiling w/ the gui, exit if a rom isn't specified
 #ifndef _GTK
 	if(romIndex <= 0) {
-		
+#ifndef __QNXNTO__
 		ShowUsage(argv[0]);
 		FCEUD_Message("\nError parsing command line arguments\n");
 		SDL_Quit();
 		return -1;
+#else
+		FCEUD_Message("no args ...\n");
+		romIndex = 1;
+#endif
 	}
 #endif
 	
@@ -765,6 +812,7 @@ int main(int argc, char *argv[])
 		// load the specified game
 		error = LoadGame(argv[romIndex]);
 		if(error != 1) {
+			fprintf(stderr,"LoadGame failed ...\n");
 			DriverKill();
 			SDL_Quit();
 			return -1;

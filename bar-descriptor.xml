@@ -56,7 +56,6 @@
     <asset path="media/nes.png">nes.png</asset>
     <asset path="media/A.png">A.png</asset>
     <asset path="media/B.png">B.png</asset>
-    <asset path="media/pad.png">pad.png</asset>
     <asset path="media/select.png">select.png</asset>
     <asset path="media/start.png">start.png</asset>
     <asset path="sdl-controls.xml">sdl-controls.xml</asset>

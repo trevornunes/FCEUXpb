@@ -431,6 +431,8 @@ void FCEU_DispMessageOnMovie(char *format, ...)
 		guiMessage.howlong = 0;
 }
 
+
+
 void FCEU_DispMessage(char *format, int disppos=0, ...)
 {
 	va_list ap;
