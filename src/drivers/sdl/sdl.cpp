@@ -8,10 +8,9 @@
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <iostream>
-#include <fstream>
 #include <limits.h>
 #include <math.h>
+
 
 #ifdef _GTK
 #include <gtk/gtk.h>
@@ -48,6 +47,9 @@
 #ifdef WIN32
 #include <windows.h>
 #endif
+
+
+
 
 extern double g_fpsScale;
 
@@ -187,19 +189,28 @@ void FCEUD_Message(char *s)
  */
 int LoadGame(const char *path)
 {
+  int loaded_game_ok = 0;
+
 #ifndef __QNXNTO__
+    // For Playbook we close the game when the 'rom switch' tap is made
+    // then load the new rom ... don't need this. see input.cpp KeyboardCommands.
 	CloseGame();
 #endif
 
 	if(path)
 	{
+	  fprintf(stderr,"LoadGame: path ok '%s'\n", path);
 	  if(!FCEUI_LoadGame(path, 1))
 	  {
-	      fprintf(stderr,"LoadGame: error loading '%s'", path);
-#ifndef __QNXNTO__
+	      fprintf(stderr,"LoadGame: ERROR loading '%s'\n", path);
+
+	      #ifndef __QNXNTO__
 	      return 0;
 #endif
-
+	  }
+	  else
+	  {
+		loaded_game_ok = 1;
 	  }
 	}
 	else
@@ -211,11 +222,17 @@ int LoadGame(const char *path)
 	}
 
 #ifdef __QNXNTO__
-	if(! FCEUI_LoadGame("/accounts/1000/shared/misc/roms/nes/game.nes",1))
-	{
-	    fprintf(stderr,"LoadGame: default game.nes not present/failed to load.\n");
-		return 0;
-	}
+        // if all else fails just attempt to load the default 'game.nes'.
+	    // The user can iterate later through rom images via the top left screen by tapping ...
+       // TODO load a random game or 'previous running game' ...
+	   if(!loaded_game_ok)
+	   {
+          fprintf(stderr,"LoadGame: path is NULL or game failed to load, DEFAULT!\n");
+           if( ! FCEUI_LoadGame( "/accounts/1000/shared/misc/roms/nes/game.nes",1) )
+        {
+            return 0;
+        }
+	   }
 #endif
 
 
@@ -247,6 +264,9 @@ int LoadGame(const char *path)
 	isloaded = 1;
 
 	FCEUD_NetworkConnect();
+
+    FCEUI_DispMessage( (char*) path , 0);
+
 	return 1;
 }
 
@@ -579,7 +599,6 @@ int main(int argc, char *argv[])
 
 	// Initialize the configuration system
 	g_config = InitConfig();
-	
 	
 	if(!g_config) {
 		SDL_Quit();

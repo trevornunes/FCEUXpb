@@ -739,3 +739,4 @@ void FCEUARCHIVEFILEINFO::FilterByExtension(const char** ext)
 	ok: ;
 	}
 }
+

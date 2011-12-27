@@ -89,13 +89,25 @@ if(!dpath)
 
 		// fprintf(stderr,"FILE: '%s' \n", direntp->d_name);
 		// FCEUI_DispMessage(direntp->d_name,0);
-		if (direntp->d_name == ".")
-			continue;
+		  string tmp = direntp->d_name;
 
-		if (direntp->d_name == "..")
-			continue;
+		  if( strcmp( direntp->d_name, ".") == 0)
+		  {
+			 continue;
+		  }
 
-  	    vsList.push_back(direntp->d_name);
+		  if( strcmp( direntp->d_name,"..") == 0)
+			  continue;
+
+         if( strcmp( direntp->d_name, "game.nes" ) == 0)
+        	continue;
+
+
+		  if(tmp.substr(tmp.find_last_of(".") + 1) == "nes")
+		  {
+	          fprintf(stderr,"ROM: %s\n", direntp->d_name);
+			  vsList.push_back(direntp->d_name);
+		  }
 	 }
   }
   else
@@ -463,15 +475,8 @@ KeyboardCommands()
 #ifdef _QNXNTO__
     if(_keyonly(Hotkeys[HK_ROM_NAV])) {
     {
-
-      vector<string> vecList;
-      fprintf(stderr"KeyboardCommand: ROM NAVIGATOR\n");
-      FCEUI_ToggleEmulationPause();
-      vecList = GetRomDirListing("/accounts/1000/shared/misc/roms/nes");
-      for(int i =0; i < vecList.end(); i = 0)
-      {
-         FCEUI_DispMessage(vecList[i],0);
-      }
+     // TODO: stop hijacking the LAG hotkey ...
+     // put the rom loader logic here ...
     }
 #endif
 	
@@ -689,35 +694,32 @@ KeyboardCommands()
     	lagCounterDisplay ^= 1;
 #else
     	static int gameIndex;
-    	static int keyHit = 0;
 
     	vector<string> vecList;
-        bool paused = FCEUI_EmulationPaused();
-    	 if(!paused)
-    	    FCEUI_ToggleEmulationPause();
 
-    	fprintf(stderr,"KeyboardCommand: ROM NAVIGATOR\n");
-    	if(keyHit++ > 1)
-    	{
-    	   keyHit = 2;
-    	   return;
-    	}
+    	fprintf(stderr,"KeyboardCommand: LOAD NEW GAME >>>>>>>>>>> \n");
 
         vecList = GetRomDirListing("/accounts/1000/shared/misc/roms/nes");
         string baseDir ="/accounts/1000/shared/misc/roms/nes/";
 
-        if(gameIndex++ > vecList.size())
+        if(gameIndex++ >= vecList.size())
         	gameIndex = 0;
+
+        if( vecList[gameIndex] == "game.nes")
+        	gameIndex++;
+
         baseDir = baseDir + vecList[gameIndex];
+        fprintf(stderr,"loading: %d '%s'\n",gameIndex, baseDir.c_str() );
+       //SDL_Delay(1000);
 
-       // FCEUI_DispMessage( (char*)vecList[gameIndex].c_str(), 0);
+       bool paused = FCEUI_EmulationPaused();
+       if(!paused)
+     	    FCEUI_ToggleEmulationPause();
 
-        FCEUI_CloseGame();
-        fprintf(stderr,"attempting to LoadGame '%s", baseDir.c_str());
+       FCEUI_CloseGame();
+       SDL_Delay(1000);  // not sure if needed ... feels right :-)
+       LoadGame( baseDir.c_str() );
 
-       // shutdown and restart ...
-        LoadGame( baseDir.c_str() );
-        keyHit = 0;
 #endif
     }
     

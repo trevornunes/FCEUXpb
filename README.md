@@ -10,7 +10,8 @@ Thanks:  FCEUX developers!
          Jeremy Nicholl for detailed and quick responses to questions and his TCO library, and for fixing the audio init glitch.
          
 Default game startup:
-Create a directory called z:/misc/nes/roms  and place an unzipped game call 'game.nes' it will auto start this if no commandline options are given.
+
+Create a directory called z:/misc/nes/roms and place an unzipped .nes files in.  At startup FCEUXpb will start the first game in the directory. You can cycle through games by tapping top left hand portion of screen.
 
          
 
@@ -23,7 +24,7 @@ Issues:
 
 Todo:
 
-1. game loader startup screen to select  images 
+1. DONE -> game loader startup screen to select  images 
 2. better key layout , maybe dpad support.
 3. compile LUA support back in
 4. OpenGL port to GLES ( so change GL_QUAD, begin-end sequences etc )

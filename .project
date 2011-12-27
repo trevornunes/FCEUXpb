@@ -3,8 +3,6 @@
 	<name>FCEUXpb</name>
 	<comment></comment>
 	<projects>
-		<project>SDL12</project>
-		<project>TouchControlOverlay</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
