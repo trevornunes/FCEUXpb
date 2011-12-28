@@ -5,13 +5,12 @@
 <key x="0" y="180" width="20" height="25" sym="276" scancode="276"/>
 <key x="25" y="180" width="20" height="25" sym="275" scancode="275"/>
 
-<key x="100" y="180" width="30" height="35" sym="115" scancode="115"/>
-<key x="130" y="180" width="30" height="35" sym="13" scancode="13"/>
+<key x="100" y="180" width="30" height="38" sym="115" scancode="115"/>
+<key x="130" y="180" width="30" height="38" sym="13" scancode="13"/>
 
-<key x="195" y="165" width="28" height="45" sym="102" scancode="102" image="A.png" />
-<key x="225" y="165" width="28" height="45" sym="100" scancode="100" image="B.png" />
+<key x="195" y="165" width="28" height="48" sym="102" scancode="102"/>
+<key x="225" y="165" width="28" height="48" sym="100" scancode="100"/>
 
 <key x="0" y="0" width="25" height="25" sym="48" scancode="254"/>
-<mouse x="0" y="150" width="25" height="25"/>
 
 </emulation>

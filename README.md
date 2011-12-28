@@ -11,7 +11,12 @@ Thanks:  FCEUX developers!
          
 Default game startup:
 
-Create a directory called z:/misc/nes/roms and place an unzipped .nes files in.  At startup FCEUXpb will start the first game in the directory. You can cycle through games by tapping top left hand portion of screen.
+Create a directory called z:/misc/nes/roms 
+Put your .nes files ( .zip not supported yet ) in this directory.
+Currently one game has to be called 'game.nes'for it to startup, once started
+you can tap the top left portion of the screen and it will autoload the next rom in the directory.  The enforcing of game.nes will be fixed up shortly.
+
+Swipe down from top of screen to see the TCO controls layout, you can move each 'key' around as you like, the game will pause during this time, swipe again to go back.
 
          
 
@@ -24,7 +29,7 @@ Issues:
 
 Todo:
 
-1. DONE -> game loader startup screen to select  images 
+1. DONE -> game loader
 2. better key layout , maybe dpad support.
 3. compile LUA support back in
 4. OpenGL port to GLES ( so change GL_QUAD, begin-end sequences etc )

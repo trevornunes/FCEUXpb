@@ -202,7 +202,7 @@ InitVideo(FCEUGI *gi)
 
 #ifndef __QNXNTO__
     // shows the cursor within the display window
-   SDL_ShowCursor(1);
+    SDL_ShowCursor(1);
 #endif
 
     // determine if we can allocate the display on the video card
@@ -232,6 +232,8 @@ InitVideo(FCEUGI *gi)
         flags |= SDL_NOFRAME;
     }
 
+    SDL_ShowCursor(0);
+
     // gives the SDL exclusive palette control... ensures the requested colors
     flags |= SDL_HWPALETTE;
 
@@ -253,6 +255,8 @@ InitVideo(FCEUGI *gi)
         int desbpp, autoscale;
         g_config->getOption("SDL.BitsPerPixel", &desbpp);
         g_config->getOption("SDL.AutoScale", &autoscale);
+
+
         if (autoscale)
         {
             double auto_xscale = GetXScale(xres);

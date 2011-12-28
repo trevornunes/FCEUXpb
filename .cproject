@@ -109,6 +109,7 @@
 								<option id="com.qnx.qcc.option.compiler.security.1183662236" name="Enhanced Security (-fstack-protector-all)" superClass="com.qnx.qcc.option.compiler.security" value="true" valueType="boolean"/>
 								<option id="com.qnx.qcc.option.compiler.defines.1985916198" name="Defines (-D)" superClass="com.qnx.qcc.option.compiler.defines" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="_FORTIFY_SOURCE=2"/>
+									<listOptionValue builtIn="false" value="LSB_FIRST"/>
 									<listOptionValue builtIn="false" value="__QNXNTO__"/>
 								</option>
 								<option id="com.qnx.qcc.option.compiler.pie.1744504597" name="Position Independent Executable (-fPIE)" superClass="com.qnx.qcc.option.compiler.pie" value="true" valueType="boolean"/>
