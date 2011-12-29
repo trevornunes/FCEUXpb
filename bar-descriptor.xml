@@ -102,7 +102,6 @@
     <action>access_internet</action>
     <action>set_audio_volume</action>
     <action>play_audio</action>
-    <action>read_device_identifying_information</action>
     
     <!--  The permissions requested by your application. -->
     <!--  <action>access_shared</action> -->
