@@ -22,14 +22,14 @@
 
     <!-- Fourth digit segment of the package version. First three segments are taken from the 
          <versionNumber> element.  Must be an integer from 0 to 2^16-1 -->
-    <buildId>1</buildId>
+    <buildId>2</buildId>
                  
     <!-- A string value (such as "v1", "2.5", or "Alpha 1") that represents the version of the application, as it should be shown to users. Optional. -->
     <!-- <versionLabel></versionLabel> -->
 
     <!-- Description, displayed in the BlackBerry Tablet OS application installer.
          May have multiple values for each language. See samples or xsd schema file. Optional. -->
-    <description>The FCEUX application</description>
+    <description>The FCEUX NES emulator</description>
 
     <!-- Copyright information. Optional. -->
     <!-- <copyright></copyright> -->
@@ -59,6 +59,7 @@
     <asset path="media/select.png">select.png</asset>
     <asset path="media/start.png">start.png</asset>
     <asset path="sdl-controls.xml">sdl-controls.xml</asset>
+    <asset path="media/round_blue.png">round_blue.png</asset>
     <configuration id="com.qnx.qcc.configuration.exe.debug.821991146" name="Device-Debug">
        <platformArchitecture>armle-v7</platformArchitecture>
        <asset path="Device-Debug/FCEUXpb" entry="true" type="Qnx/Elf">FCEUXpb</asset>

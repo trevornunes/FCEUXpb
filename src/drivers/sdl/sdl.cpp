@@ -246,9 +246,9 @@ int LoadGame(const char *path)
 	printf("LoadGame: DriverInitialize ok\n");
 	
 	// set pal/ntsc
-	int id;
+	int id = 0;
 	g_config->getOption("SDL.PAL", &id);
-	printf("setting up PAL/NTSC mode ...\n");
+
 	if(id)
 		FCEUI_SetVidSystem(1);
 	else
@@ -265,7 +265,10 @@ int LoadGame(const char *path)
 
 	FCEUD_NetworkConnect();
 
-    FCEUI_DispMessage( (char*) path , 0);
+#ifdef __QNXNTO__
+	extern char g_runningFile_str[64];
+    FCEUI_DispMessage( g_runningFile_str,0);
+#endif
 
 	return 1;
 }
@@ -328,12 +331,21 @@ static void DoFun(int frameskip)
 static int
 DriverInitialize(FCEUGI *gi)
 {
+#ifdef __QNXNTO__
+ static int driverDone = 0;
+ if(driverDone)
+ {
+   fprintf(stderr,"DriverInitialize: skipping...\n");
+   return 1;
+ }
+#endif
 
 	if(InitVideo(gi) < 0) return 0;
 	inited|=4;
 
 	if(InitSound())
 		inited|=1;
+
 
 	printf("DriverInitialize: joysticks\n");
 
@@ -348,6 +360,9 @@ DriverInitialize(FCEUGI *gi)
 
 	printf("DriverInitialize: input-interface\n");
 	InitInputInterface();
+#ifdef __QNXNTO__
+	driverDone = 1;
+#endif
 	return 1;
 }
 
@@ -775,7 +790,7 @@ int main(int argc, char *argv[])
 		SDL_Quit();
 		return -1;
 #else
-		FCEUD_Message("no args ...\n");
+        // If no arguments passed, we don't fail for QNX ... AutoLoadRom() instead ...
 		romIndex = 1;
 #endif
 	}
@@ -826,6 +841,9 @@ int main(int argc, char *argv[])
 	while(gtk_events_pending())
 			gtk_main_iteration_do(FALSE);
 #endif
+
+#ifndef __QNXNTO__
+
 	if(romIndex >= 0)
 	{
 		// load the specified game
@@ -836,12 +854,16 @@ int main(int argc, char *argv[])
 			SDL_Quit();
 			return -1;
 		}
+
 		printf("game loaded, SDL configured ...\n");
 
 		g_config->setOption("SDL.LastOpenFile", argv[romIndex]);
 		g_config->save();
-
 	}
+#else
+	extern void AutoLoadRom(void);  // sick ... fix me.
+	AutoLoadRom();
+#endif
 	
 	// movie playback
 	g_config->getOption("SDL.Movie", &s);

@@ -11,31 +11,34 @@ Thanks:  FCEUX developers!
          
 Default game startup:
 
-Create a directory called z:/misc/nes/roms 
-Put your .nes files ( .zip not supported yet ) in this directory.
-Currently one game has to be called 'game.nes'for it to startup, once started
-you can tap the top left portion of the screen and it will autoload the next rom in the directory.  The enforcing of game.nes will be fixed up shortly.
-
-Swipe down from top of screen to see the TCO controls layout, you can move each 'key' around as you like, the game will pause during this time, swipe again to go back.
+1. Create a directory called z:/misc/nes/roms 
+2. Put your .nes files ( .zip not supported yet ) in this directory.
+   - Currently one game has to be called 'game.nes'for it to startup.
+   - This will be fixed up shortly.
+   
+3. You can tap the top left portion of the screen and it will autoload the next rom in the directory.  
+4. Swipe down from top of screen to see the TCO controls layout
+   - You can move each 'key' around as you like, the game will pause during this time, swipe down again to go back.
 
          
 
 Issues:
 
-1. Sprite glitches , garbled sprites appear portions are mirrored ( suspect endian issues )
-2. LUA not compiled in yet.
-3. OpenGL support not ported to GLES i.e. sdl-opengl.cpp 
+1. sound stops on every second load when you load new games via 'tapping'
+2. Sometimes exits if you tap too quickly
+3. game speed issues 
+4. game.nes required on first load in z:misc/roms/nes dir.
 
 
 Todo:
 
-1. DONE -> game loader
+1. labels for pad 
 2. better key layout , maybe dpad support.
 3. compile LUA support back in
 4. OpenGL port to GLES ( so change GL_QUAD, begin-end sequences etc )
 5. USB host joystick support, should be possible on 2.x release so we can use proper pads.
-6. Bluetooth, Phone control ?
-7. Network support ( it's compiled in but original source is broken I believe )
+6. LUA compile, it's useful for debugging and other users not so much for game playing.
+7. Network support ( it's compiled in, but original source is broken I believe )
  
  
 contact: trevor.nunes@gmail.com

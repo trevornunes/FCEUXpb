@@ -60,7 +60,9 @@ extern bool bindSavestate, frameAdvanceLagSkip, lagCounterDisplay;
 
 
 
-
+//
+//
+//
 vector<string> GetRomDirListing( const char *dpath )
 {
  vector<string> vsList;
@@ -119,6 +121,53 @@ if(!dpath)
  //fprintf(stderr,"number of files %d\n", vsList.size() )
 return vsList;
 }
+
+
+
+char g_runningFile_str[64];
+
+
+//
+//
+//
+void AutoLoadRom(void)
+{
+    static int gameIndex;
+
+	vector<string> vecList;
+
+	fprintf(stderr,"AutoLoadRom\n");
+
+    vecList = GetRomDirListing("/accounts/1000/shared/misc/roms/nes");
+    string baseDir ="/accounts/1000/shared/misc/roms/nes/";
+
+    if(gameIndex++ >= vecList.size())
+    	gameIndex = 0;
+
+    if( vecList[gameIndex] == "game.nes")
+    	gameIndex++;
+
+    memset(&g_runningFile_str[0],0,64);
+    sprintf(&g_runningFile_str[0], vecList[gameIndex].c_str());
+
+    baseDir = baseDir + vecList[gameIndex];
+    fprintf(stderr,"loading: %d '%s'\n",gameIndex, baseDir.c_str() );
+   //SDL_Delay(1000);
+
+   bool paused = FCEUI_EmulationPaused();
+   if(!paused)
+ 	    FCEUI_ToggleEmulationPause();
+
+   FCEUI_CloseGame();
+   SDL_Delay(250);  // not sure if needed ... feels right :-)
+   LoadGame( baseDir.c_str() );
+}
+
+
+
+
+
+
 
 
 /* UsrInputType[] is user-specified.  InputType[] is current
@@ -693,33 +742,7 @@ KeyboardCommands()
 #ifndef __QNXNTO__
     	lagCounterDisplay ^= 1;
 #else
-    	static int gameIndex;
-
-    	vector<string> vecList;
-
-    	fprintf(stderr,"KeyboardCommand: LOAD NEW GAME >>>>>>>>>>> \n");
-
-        vecList = GetRomDirListing("/accounts/1000/shared/misc/roms/nes");
-        string baseDir ="/accounts/1000/shared/misc/roms/nes/";
-
-        if(gameIndex++ >= vecList.size())
-        	gameIndex = 0;
-
-        if( vecList[gameIndex] == "game.nes")
-        	gameIndex++;
-
-        baseDir = baseDir + vecList[gameIndex];
-        fprintf(stderr,"loading: %d '%s'\n",gameIndex, baseDir.c_str() );
-       //SDL_Delay(1000);
-
-       bool paused = FCEUI_EmulationPaused();
-       if(!paused)
-     	    FCEUI_ToggleEmulationPause();
-
-       FCEUI_CloseGame();
-       SDL_Delay(1000);  // not sure if needed ... feels right :-)
-       LoadGame( baseDir.c_str() );
-
+    	AutoLoadRom();
 #endif
     }
     
