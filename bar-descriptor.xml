@@ -22,7 +22,7 @@
 
     <!-- Fourth digit segment of the package version. First three segments are taken from the 
          <versionNumber> element.  Must be an integer from 0 to 2^16-1 -->
-    <buildId>2</buildId>
+    <buildId>3</buildId>
                  
     <!-- A string value (such as "v1", "2.5", or "Alpha 1") that represents the version of the application, as it should be shown to users. Optional. -->
     <!-- <versionLabel></versionLabel> -->
@@ -54,12 +54,11 @@
     <asset path="C:/bbndk-1.0/target/target-override/armle-v7/usr/lib/libSDL12.so" type="Qnx/Elf">lib/libSDL12.so</asset>
     <asset path="fceux.png">fceux.png</asset>
     <asset path="media/nes.png">nes.png</asset>
-    <asset path="media/A.png">A.png</asset>
-    <asset path="media/B.png">B.png</asset>
-    <asset path="media/select.png">select.png</asset>
-    <asset path="media/start.png">start.png</asset>
     <asset path="sdl-controls.xml">sdl-controls.xml</asset>
-    <asset path="media/round_blue.png">round_blue.png</asset>
+    <asset path="media/AB.png">AB.png</asset>
+    <asset path="media/dpad_horizontal.png">dpad_horizontal.png</asset>
+    <asset path="media/dpad_vert.png">dpad_vert.png</asset>
+    <asset path="media/select.png">select.png</asset>
     <configuration id="com.qnx.qcc.configuration.exe.debug.821991146" name="Device-Debug">
        <platformArchitecture>armle-v7</platformArchitecture>
        <asset path="Device-Debug/FCEUXpb" entry="true" type="Qnx/Elf">FCEUXpb</asset>

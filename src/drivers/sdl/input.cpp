@@ -130,7 +130,7 @@ char g_runningFile_str[64];
 //
 //
 //
-void AutoLoadRom(void)
+int AutoLoadRom(void)
 {
     static int gameIndex;
 
@@ -160,7 +160,7 @@ void AutoLoadRom(void)
 
    FCEUI_CloseGame();
    SDL_Delay(250);  // not sure if needed ... feels right :-)
-   LoadGame( baseDir.c_str() );
+   return ( LoadGame( baseDir.c_str() ) );
 }
 
 
@@ -742,7 +742,19 @@ KeyboardCommands()
 #ifndef __QNXNTO__
     	lagCounterDisplay ^= 1;
 #else
-    	AutoLoadRom();
+     int failAttempts = 0;
+     while(1)
+     {
+      if( AutoLoadRom() == 1) // if rom load works break out, else iterate through list again.
+    	  break;
+
+      if( failAttempts++ > 10)
+      {
+        FCEU_DispMessage("tried 10 times to load a rom, giving up...",0);
+        SDL_Delay(2000);
+      }
+     }
+
 #endif
     }
     
