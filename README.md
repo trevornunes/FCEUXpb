@@ -25,6 +25,17 @@ Default game startup:
 
 History
 ===========================================
+v1.0.0.6 01/01/2012
+
+- use shared/misc/fceux as the configuration dir store
+- new sdl-controls.xml overlay
+
+v1.0.0.5 11/31/2011
+- stuff
+
+v1.0.0.4  11/29/2011
+- can't remember :-)
+
 v1.0.0.3  11/31/2011
 
 - graphic overlays added
