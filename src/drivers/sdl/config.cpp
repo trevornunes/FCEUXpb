@@ -71,6 +71,7 @@ CreateDirs(const std::string &dir)
     mkdir(dir.c_str(), S_IRWXU);
     for(x = 0; x < 6; x++) {
         subdir = dir + PSS + subs[x];
+        fprintf(stderr,"CreateDirs: %s\n", subdir.c_str());
         mkdir(subdir.c_str(), S_IRWXU);
     }
 #endif
@@ -85,9 +86,16 @@ static void
 GetBaseDirectory(std::string &dir)
 {
     char *home = getenv("HOME");
+
+#ifdef __QNXNTO__
+    	fprintf(stderr,"GetBaseDirectory: Playbook override to shared/misc/fceux\n");
+    	dir = std::string("/accounts/1000/shared/misc/fceux") + "/.fceux";
+    	return;
+#endif
+
     if(home) {
         dir = std::string(home) + "/.fceux";
-    } else {
+
 #ifdef WIN32
         home = new char[MAX_PATH + 1];
         GetModuleFileName(NULL, home, MAX_PATH + 1);
@@ -100,7 +108,7 @@ GetBaseDirectory(std::string &dir)
         dir = std::string(home);
         delete[] home;
 #else
-        dir = "";
+       dir = "";
 #endif
     }
 }

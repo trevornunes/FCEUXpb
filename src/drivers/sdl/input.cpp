@@ -144,22 +144,18 @@ int AutoLoadRom(void)
     if(gameIndex++ >= vecList.size())
     	gameIndex = 0;
 
-    if( vecList[gameIndex] == "game.nes")
-    	gameIndex++;
-
     memset(&g_runningFile_str[0],0,64);
     sprintf(&g_runningFile_str[0], vecList[gameIndex].c_str());
 
     baseDir = baseDir + vecList[gameIndex];
     fprintf(stderr,"loading: %d '%s'\n",gameIndex, baseDir.c_str() );
-   //SDL_Delay(1000);
 
    bool paused = FCEUI_EmulationPaused();
    if(!paused)
  	    FCEUI_ToggleEmulationPause();
 
    FCEUI_CloseGame();
-   SDL_Delay(250);  // not sure if needed ... feels right :-)
+   SDL_Delay(50);  // not sure if needed ... feels right :-)
    return ( LoadGame( baseDir.c_str() ) );
 }
 

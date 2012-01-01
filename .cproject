@@ -33,11 +33,13 @@
 									<listOptionValue builtIn="false" value="__QNXNTO__"/>
 								</option>
 								<option id="com.qnx.qcc.option.compiler.includePath.957210838" name="Include Directories (-I)" superClass="com.qnx.qcc.option.compiler.includePath" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/SDL12/include}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TouchControlOverlay/public}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src}&quot;"/>
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/usr/include/freetype2"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/SDL12/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;C:\bbndk-2.0.0-beta1\target\qnx6\usr\include\cpp&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;C:\bbndk-2.0.0-beta1\target\qnx6\usr\include\cpp\c&quot;"/>
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/../target-override/usr/include"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TouchControlOverlay/public}&quot;"/>
 									<listOptionValue builtIn="false" value="/usr/include/c++/4.2.2"/>
 								</option>
 								<option id="com.qnx.qcc.option.compiler.warningLevel.1390007584" name="Warning Level (-w)" superClass="com.qnx.qcc.option.compiler.warningLevel" value="com.qnx.qcc.option.warningLevel.0" valueType="enumerated"/>
@@ -49,6 +51,10 @@
 							</tool>
 							<tool id="com.qnx.qcc.tool.assembler.120131925" name="QCC Assembler" superClass="com.qnx.qcc.tool.assembler">
 								<option id="com.qnx.qcc.option.assembler.debug.1995242636" name="Debug (-g)" superClass="com.qnx.qcc.option.assembler.debug" value="true" valueType="boolean"/>
+								<option id="com.qnx.qcc.option.assembler.includePath.589676101" superClass="com.qnx.qcc.option.assembler.includePath" valueType="includePath">
+									<listOptionValue builtIn="false" value="c:/bbndk-2.0.0-beta1/target/qnx6/usr/include/cpp/c"/>
+									<listOptionValue builtIn="false" value="c:/bbndk-2.0.0-beta1/target/qnx6/usr/include/cpp"/>
+								</option>
 								<inputType id="com.qnx.qcc.inputType.assembler.2049186753" superClass="com.qnx.qcc.inputType.assembler"/>
 							</tool>
 							<tool commandLinePattern="qcc -V4.4.2,gcc_ntoarmv7le_cpp -w1 -g -Wl -lang-c++  ${OUTPUT_FLAG} ${OUTPUT_PREFIX}${OUTPUT} ${INPUTS} ${FLAGS}" id="com.qnx.qcc.tool.linker.146784416" name="QCC Linker" superClass="com.qnx.qcc.tool.linker">

@@ -267,7 +267,7 @@ int LoadGame(const char *path)
 
 #ifdef __QNXNTO__
 	extern char g_runningFile_str[64];
-    FCEUI_DispMessage( g_runningFile_str,0);
+    FCEUI_DispMessage( g_runningFile_str,220);
 #endif
 
 	return 1;
