@@ -29,6 +29,9 @@
 #endif
 /* compile with -Dlocal if your debugger can't find static symbols */
 
+#ifdef __QNXNTO__
+#define CASESENSITIVITYDEFAULT_YES 1
+#endif
 
 
 #if !defined(unix) && !defined(CASESENSITIVITYDEFAULT_YES) && \

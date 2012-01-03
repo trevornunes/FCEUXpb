@@ -19,7 +19,7 @@
          Values can also be 1-part or 2-part. It is not necessary to have a 3-part value.
          An updated version of application must have a versionNumber value higher than the previous version. Required. -->
     <versionNumber>1.0.0</versionNumber>
-    <buildId>6</buildId>
+    <buildId>8</buildId>
 
     <!-- Fourth digit segment of the package version. First three segments are taken from the 
          <versionNumber> element.  Must be an integer from 0 to 2^16-1 -->
@@ -37,7 +37,7 @@
     <!--  Name of author which is used for signing. Must match the developer name of your development certificate. -->
     <author>t</author>
     <authorId>gYAAgOKRaqVbNM5ToziNoZFV720</authorId>
-    <splashscreen>nes.png:fceux_vertical.png</splashscreen>
+    <splashscreen>nes.png</splashscreen>
     
     <!--  Unique author ID assigned by signing authority. Required if using debug tokens. -->
     <!-- <authorId>ABC1234YjsnUk235h</authorId> -->
@@ -48,9 +48,8 @@
     </initialWindow>
     
     <!--  The category where the application appears. Either core.games or core.media. -->
-    <category>core.games</category>
+    <category>core.media</category>
     <asset path="fceux.png">fceux.png</asset>
-    <asset path="media/nes.png">nes.png</asset>
     <asset path="sdl-controls.xml">sdl-controls.xml</asset>
     <asset path="media/AB.png">AB.png</asset>
     <asset path="media/dpad_horizontal.png">dpad_horizontal.png</asset>
@@ -60,6 +59,8 @@
     <asset path="${workspace_loc:/SDL12/Device-Release/libSDL12.so}" type="Qnx/Elf">lib/libSDL12.so</asset>
     <asset path="${workspace_loc:/TouchControlOverlay/Device-Release/libTouchControlOverlay.so}" type="Qnx/Elf">lib/libTouchControlOverlay.so</asset>
     <asset path="${QNX_TARGET}\..\target-override\armle-v7\usr\lib\libbps.so" type="Qnx/Elf">lib/libbps.so.1</asset>
+    <asset path="C:/Documents and Settings/tnunes/Desktop/nes.png">nes.png</asset>
+    <asset path="C:/fceux-icon.png">fceux-icon.png</asset>
     <configuration id="com.qnx.qcc.configuration.exe.debug.821991146" name="Device-Debug">
        <platformArchitecture>armle-v7</platformArchitecture>
        <asset path="Device-Debug/FCEUXpb" entry="true" type="Qnx/Elf">FCEUXpb</asset>
@@ -91,7 +92,7 @@
     
     <!--  The icon for the application, which should be 86x86. -->
     <icon>
-        <image>fceux.png</image>
+        <image>fceux-icon.png</image>
     </icon>
     
     <!--  The splash screen that will appear when your application is launching. Should be 1024x600. -->

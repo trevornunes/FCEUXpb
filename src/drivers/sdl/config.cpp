@@ -89,7 +89,8 @@ GetBaseDirectory(std::string &dir)
 
 #ifdef __QNXNTO__
     	fprintf(stderr,"GetBaseDirectory: Playbook override to shared/misc/fceux\n");
-    	dir = std::string("/accounts/1000/shared/misc/fceux") + "/.fceux";
+    	//dir = std::string("/accounts/1000/shared/misc/fceux") + "/.fceux";
+    	dir = std::string("/accounts/1000/shared/misc/fceux");
     	return;
 #endif
 

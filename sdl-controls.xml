@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <emulation version="1">
 
- <key x="8" y="190" width="16" height="16" sym="273" scancode="273">
+ <key x="8" y="150" width="16" height="16" sym="273" scancode="273">
  <label x="0" y="0" width="16" height="16" image="dpad_vert.png"/>
  </key>
  
- <key x="8" y="210" width="16" height="16" sym="274" scancode="274">
+ <key x="8" y="190" width="16" height="16" sym="274" scancode="274">
  <label x="0" y="0" width="16" height="16" image="dpad_vert.png"/>
  </key>
  
- <key x="0" y="200" width="16" height="16" sym="276" scancode="276">
+ <key x="0" y="170" width="16" height="16" sym="276" scancode="276">
  <label x="0" y="0" width="16" height="16" image="dpad_horizontal.png"/>
  </key>
  
- <key x="16" y="200" width="16" height="16" sym="275" scancode="275">
+ <key x="16" y="170" width="16" height="16" sym="275" scancode="275">
 <label x="0" y="0" width="16" height="16" image="dpad_horizontal.png" />
 </key>
 
-<key x="90" y="220" width="32" height="16" sym="115" scancode="115">
+<key x="80" y="180" width="32" height="16" sym="115" scancode="115">
 <label x="0" y="0" width="32" height="16" image="select.png"/>
 </key>
 
-<key x="130" y="220" width="32" height="16" sym="13" scancode="13">
+<key x="120" y="180" width="32" height="16" sym="13" scancode="13">
 <label x="0" y="0" width="32" height="16" image="select.png"/>
 </key>
 
-<key x="195" y="220" width="32" height="16" sym="102" scancode="102">
+<key x="175" y="180" width="32" height="16" sym="102" scancode="100">
 <label x="0" y="0" width="32" height="16" image="AB.png"/>
 </key>
 
-<key x="225" y="220" width="32" height="16" sym="100" scancode="100">
+<key x="209" y="180" width="32" height="16" sym="100" scancode="102">
 <label x="0" y="0" width="32" height="16" image="AB.png"/>
 </key>
 
 <key x="0" y="0" width="25" height="25" sym="48" scancode="254"/>
-<key x="228" y="0" width="25" height="25" sym="292" scancode="292"/>
+<key x="218" y="0" width="25" height="25" sym="292" scancode="292"/>
 
 </emulation>

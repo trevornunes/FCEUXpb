@@ -241,9 +241,12 @@ int LoadGame(const char *path)
 
 
 	if(!DriverInitialize(GameInfo)) {
-		return(0);
+        fprintf(stderr,"LoadGame: DrivierInitialize failed\n");
 	}
-	printf("LoadGame: DriverInitialize ok\n");
+	 else
+	{
+    	printf("LoadGame: DriverInitialize ok\n");
+	}
 	
 	// set pal/ntsc
 	int id = 0;
@@ -261,13 +264,14 @@ int LoadGame(const char *path)
 			g_config->setOption("SDL.Sound.RecordFile", "");
 		}
 	}
-	isloaded = 1;
 
 	FCEUD_NetworkConnect();
 
+	isloaded = 1;
+
 #ifdef __QNXNTO__
 	extern char g_runningFile_str[64];
-    FCEUI_DispMessage( g_runningFile_str,220);
+    FCEUI_DispMessage( g_runningFile_str,20);
 #endif
 
 	return 1;
@@ -333,12 +337,15 @@ DriverInitialize(FCEUGI *gi)
 {
 #ifdef __QNXNTO__
  static int driverDone = 0;
+
  if(driverDone)
  {
    fprintf(stderr,"DriverInitialize: skipping...\n");
    return 1;
  }
 #endif
+
+    fprintf(stderr,"DriverInitialize: full setup ...\n");
 
 	if(InitVideo(gi) < 0) return 0;
 	inited|=4;
@@ -360,8 +367,9 @@ DriverInitialize(FCEUGI *gi)
 
 	printf("DriverInitialize: input-interface\n");
 	InitInputInterface();
+
 #ifdef __QNXNTO__
-	driverDone = 1;
+	driverDone++;
 #endif
 	return 1;
 }

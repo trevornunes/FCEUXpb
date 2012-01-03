@@ -409,25 +409,27 @@ FCEUGI *FCEUI_LoadGameVirtual(const char *name, int OverwriteVidMode)
 	//attempt to open the files
 	FCEUFILE *fp;
 
+#ifndef __QNXNTO__
 	FCEU_printf("Loading '%s' ...\n\n",name);
-
+#else
+	FCEU_printf("FCEUI_LoadGameVirtual: '%s'\n", name);
+#endif
 	const char* romextensions[] = {"nes","fds",0};
 	fp=FCEU_fopen(name,0,"rb",0,-1,romextensions);
 	if(!fp)
 	{
-		fprintf(stderr,"Cannot load ROM file %s, FCEU_fopen failed \n", name);
-		if (!FCEU_fopen("./smb.nes",0,"rb",0,-1, romextensions))
-		{
-	    	return 0;
-		}
+	  fprintf(stderr,"Cannot load ROM file %s, FCEU_fopen failed \n", name);
+	  return 0;
 	}
 
 	GetFileBase(fp->filename.c_str());
-
+#ifndef __QNXNTO__
 	if(!fp) {
 		FCEU_PrintError("Error opening \"%s\"!",name);
 		return 0;
 	}
+#endif
+
 	//---------
 
 	//file opened ok. start loading.
@@ -439,7 +441,10 @@ FCEUGI *FCEUI_LoadGameVirtual(const char *name, int OverwriteVidMode)
 	for (AutosaveIndex=0; AutosaveIndex<AutosaveQty; ++AutosaveIndex)
 		AutosaveStatus[AutosaveIndex] = 0;
 
-	FCEU_CloseGame();
+#ifndef __QNXNTO__
+	FCEU_CloseGame(); // for playbook we already have closed the game.
+#endif
+
 	GameInfo = new FCEUGI();
 	memset(GameInfo, 0, sizeof(FCEUGI));
 

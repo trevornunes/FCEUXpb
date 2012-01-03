@@ -50,6 +50,7 @@ using namespace std;
 
 #ifdef __QNXNTO__
 #include <dirent.h>
+#include <pthread.h>  // mutex
 #endif
 
 /** GLOBALS **/
@@ -101,13 +102,10 @@ if(!dpath)
 		  if( strcmp( direntp->d_name,"..") == 0)
 			  continue;
 
-         if( strcmp( direntp->d_name, "game.nes" ) == 0)
-        	continue;
-
-
-		  if(tmp.substr(tmp.find_last_of(".") + 1) == "nes")
+		  if( (tmp.substr(tmp.find_last_of(".") + 1) == "nes") ||
+			  (tmp.substr(tmp.find_last_of(".") + 1) == "NES") )
 		  {
-	          fprintf(stderr,"ROM: %s\n", direntp->d_name);
+	         // fprintf(stderr,"ROM: %s\n", direntp->d_name);
 			  vsList.push_back(direntp->d_name);
 		  }
 	 }
@@ -125,7 +123,9 @@ return vsList;
 
 
 char g_runningFile_str[64];
-
+#ifdef __QNXNTO__
+static pthread_mutex_t loader_mutex = PTHREAD_MUTEX_INITIALIZER;
+#endif
 
 //
 //
@@ -133,6 +133,9 @@ char g_runningFile_str[64];
 int AutoLoadRom(void)
 {
     static int gameIndex;
+    int status = 0;
+
+    pthread_mutex_lock(&loader_mutex);
 
 	vector<string> vecList;
 
@@ -141,22 +144,32 @@ int AutoLoadRom(void)
     vecList = GetRomDirListing("/accounts/1000/shared/misc/roms/nes");
     string baseDir ="/accounts/1000/shared/misc/roms/nes/";
 
-    if(gameIndex++ >= vecList.size())
+    if(gameIndex++ > vecList.size())
     	gameIndex = 0;
 
     memset(&g_runningFile_str[0],0,64);
     sprintf(&g_runningFile_str[0], vecList[gameIndex].c_str());
 
     baseDir = baseDir + vecList[gameIndex];
-    fprintf(stderr,"loading: %d '%s'\n",gameIndex, baseDir.c_str() );
+    fprintf(stderr,"loading: %d/%d '%s'\n",gameIndex, vecList.size(), baseDir.c_str() );
 
    bool paused = FCEUI_EmulationPaused();
    if(!paused)
  	    FCEUI_ToggleEmulationPause();
 
+
    FCEUI_CloseGame();
-   SDL_Delay(50);  // not sure if needed ... feels right :-)
-   return ( LoadGame( baseDir.c_str() ) );
+  // SDL_Delay(50);  // not sure if needed ... feels right :-)
+   status = LoadGame( baseDir.c_str() );
+
+   if( status == 0)
+   {
+     fprintf(stderr,"BAD ROM?: id=%d file='%s'\n", gameIndex, g_runningFile_str );
+   }
+
+   pthread_mutex_unlock(&loader_mutex);  // -lpthread normally would be added, it's already in PB runtime.
+
+   return status;
 }
 
 
