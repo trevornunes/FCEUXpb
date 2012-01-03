@@ -1,8 +1,6 @@
 FCEUXpb the FCEUX port for Blackberry Playbook  
 
-FCEUX is a Nintendo Entertainment System and 'Famicom' emulator of the classic 8bit console of the 1980s. 
-This project uses SDL, TouchControlOverlay and the native development kit to implement a basic SDL port of FCEUX.
-Currently there are glitches with sprite rendering but it's playable.  Input layout needs more work for sure.
+FCEUX is a Nintendo Entertainment System and 'Famicom' emulator of the classic 8bit console of the 1980s.  This project depends on SDL and TouchControlOverlay libraries found on the github.com/blackberry pages. 
 
 http://www.fceux.com
 
@@ -25,6 +23,13 @@ Default game startup:
 
 History
 ===========================================
+v1.0.0.8 03/01/2012
+- another sdl-controls.xml with buttons moved 50 odd pixels up.
+- misc/fceux is now root directory, note: only fceux.cfg is visible via share.
+  you need to ssh into the device to fiddle around with .sav files etc.
+- rom loader fixes, mutex locking and no delays on rom switching.
+
+
 v1.0.0.6 01/01/2012
 
 - use shared/misc/fceux as the configuration dir store
