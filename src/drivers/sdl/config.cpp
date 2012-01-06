@@ -68,11 +68,14 @@ CreateDirs(const std::string &dir)
         mkdir(subdir.c_str());
     }
 #else
-    mkdir(dir.c_str(), S_IRWXU);
+    mkdir( dir.c_str(), S_IRWXU | S_IRWXG);
+    chmod( dir.c_str(), S_IRWXU | S_IRWXG);
+
     for(x = 0; x < 6; x++) {
         subdir = dir + PSS + subs[x];
         fprintf(stderr,"CreateDirs: %s\n", subdir.c_str());
-        mkdir(subdir.c_str(), S_IRWXU);
+        mkdir(subdir.c_str(), S_IRWXU | S_IRWXG);
+        chmod(subdir.c_str(), S_IRWXU | S_IRWXG);
     }
 #endif
 }

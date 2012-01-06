@@ -51,6 +51,7 @@ using namespace std;
 #ifdef __QNXNTO__
 #include <dirent.h>
 #include <pthread.h>  // mutex
+#include "touchcontroloverlay.h"  // tco_xxxx functions for touch input control
 #endif
 
 /** GLOBALS **/
@@ -565,12 +566,18 @@ KeyboardCommands()
     }
 
     // Alt-Enter to toggle full-screen
-    if(keyonly(ENTER) && is_alt) {
-        ToggleFS();
+    if(keyonly(O) && is_shift) {
+        FCEUI_DispMessage("toggle control gfx", 210);
+    	tco_toggle_showlabels();
     }
+    
+   if(keyonly(L) & is_shift)
+   {
+	   FCEUI_DispMessage("loading custom control",210);
+	   extern tco_context_t *g_tco_context_ptr;
+	   tco_loadcontrols(g_tco_context_ptr, "/accounts/1000/shared/misc/fceux/cust-controls.xml");
+   }
 
-    
-    
     // Toggle Movie auto-backup
     if(keyonly(M) && is_shift) {
         autoMovieBackup ^= 1;
@@ -708,7 +715,9 @@ KeyboardCommands()
     }
     
     if(_keyonly(Hotkeys[HK_RESET])) {
-        FCEUI_ResetNES();
+       // FCEUI_ResetNES();
+       fprintf(stderr,"toggle show labels\n");
+       tco_toggle_showlabels();
     }
     //if(_keyonly(Hotkeys[HK_POWER])) {
     //    FCEUI_PowerNES();

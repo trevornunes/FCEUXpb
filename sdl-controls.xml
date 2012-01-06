@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <emulation version="1">
 
- <key x="8" y="150" width="16" height="16" sym="273" scancode="273">
- <label x="0" y="0" width="16" height="16" image="dpad_vert.png"/>
+ <key x="20" y="145" width="22" height="35" sym="273" scancode="273">
+ <label x="0" y="0" width="22" height="35" image="up.png"/>
  </key>
  
- <key x="8" y="190" width="16" height="16" sym="274" scancode="274">
- <label x="0" y="0" width="16" height="16" image="dpad_vert.png"/>
+ <key x="20" y="180" width="22" height="35" sym="274" scancode="274">
+ <label x="0" y="0" width="22" height="35" image="down.png"/>
  </key>
  
- <key x="0" y="170" width="16" height="16" sym="276" scancode="276">
- <label x="0" y="0" width="16" height="16" image="dpad_horizontal.png"/>
+ <key x="2" y="167" width="20" height="28" sym="276" scancode="276">
+ <label x="0" y="0" width="27" height="28" image="left.png"/>
  </key>
  
- <key x="16" y="170" width="16" height="16" sym="275" scancode="275">
-<label x="0" y="0" width="16" height="16" image="dpad_horizontal.png" />
+ <key x="40" y="167" width="20" height="28" sym="275" scancode="275">
+<label x="-7" y="-1" width="27" height="28" image="right.png" />
 </key>
 
-<key x="80" y="180" width="32" height="16" sym="115" scancode="115">
-<label x="0" y="0" width="32" height="16" image="select.png"/>
+<key x="90" y="190" width="30" height="30" sym="115" scancode="115">
+<label x="0" y="0" width="30" height="30" image="select.png"/>
 </key>
 
-<key x="120" y="180" width="32" height="16" sym="13" scancode="13">
-<label x="0" y="0" width="32" height="16" image="select.png"/>
+<key x="120" y="190" width="30" height="30" sym="13" scancode="13">
+<label x="0" y="0" width="30" height="30" image="start.png"/>
 </key>
 
-<key x="175" y="180" width="32" height="16" sym="102" scancode="100">
-<label x="0" y="0" width="32" height="16" image="AB.png"/>
+<key x="175" y="180" width="32" height="32" sym="100" scancode="100">
+<label x="0" y="0" width="32" height="32" image="B.png"/>
 </key>
 
-<key x="209" y="180" width="32" height="16" sym="100" scancode="102">
-<label x="0" y="0" width="32" height="16" image="AB.png"/>
+<key x="209" y="180" width="32" height="32" sym="102" scancode="102">
+<label x="0" y="0" width="32" height="32" image="A.png"/>
 </key>
 
 <key x="0" y="0" width="25" height="25" sym="48" scancode="254"/>

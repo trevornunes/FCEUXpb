@@ -51,7 +51,7 @@
 							</tool>
 							<tool id="com.qnx.qcc.tool.assembler.120131925" name="QCC Assembler" superClass="com.qnx.qcc.tool.assembler">
 								<option id="com.qnx.qcc.option.assembler.debug.1995242636" name="Debug (-g)" superClass="com.qnx.qcc.option.assembler.debug" value="true" valueType="boolean"/>
-								<option id="com.qnx.qcc.option.assembler.includePath.589676101" superClass="com.qnx.qcc.option.assembler.includePath" valueType="includePath">
+								<option id="com.qnx.qcc.option.assembler.includePath.589676101" name="Include Directories (-I)" superClass="com.qnx.qcc.option.assembler.includePath" valueType="includePath">
 									<listOptionValue builtIn="false" value="c:/bbndk-2.0.0-beta1/target/qnx6/usr/include/cpp/c"/>
 									<listOptionValue builtIn="false" value="c:/bbndk-2.0.0-beta1/target/qnx6/usr/include/cpp"/>
 								</option>
@@ -120,9 +120,9 @@
 								</option>
 								<option id="com.qnx.qcc.option.compiler.pie.1744504597" name="Position Independent Executable (-fPIE)" superClass="com.qnx.qcc.option.compiler.pie" value="true" valueType="boolean"/>
 								<option id="com.qnx.qcc.option.compiler.includePath.1649607675" name="Include Directories (-I)" superClass="com.qnx.qcc.option.compiler.includePath" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/3rdparty/inc}&quot;"/>
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/usr/include/freetype2"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/SDL12/include}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;C:\bbndk-2.0.0-beta1\target\qnx6\usr\include\cpp&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;C:\bbndk-2.0.0-beta1\target\qnx6\usr\include\cpp\c&quot;"/>
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/../target-override/usr/include"/>
@@ -153,9 +153,8 @@
 								<option id="com.qnx.qcc.option.linker.security.1961149764" name="Enhanced Security (-Wl,-z,relro -Wl,-z,now)" superClass="com.qnx.qcc.option.linker.security" value="true" valueType="boolean"/>
 								<option id="com.qnx.qcc.option.linker.pie.941294353" name="Position Independent Executable (-pie)" superClass="com.qnx.qcc.option.linker.pie" value="true" valueType="boolean"/>
 								<option id="com.qnx.qcc.option.linker.libraryPaths.757796428" name="Library Paths (-L)" superClass="com.qnx.qcc.option.linker.libraryPaths" valueType="libPaths">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/3rdparty/libs}&quot;"/>
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/../target-override/${CPUVARDIR}/lib"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/SDL12/Device-Release}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TouchControlOverlay/Device-Release}&quot;"/>
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/../target-override/${CPUVARDIR}/usr/lib"/>
 								</option>
 								<inputType id="com.qnx.qcc.inputType.linker.1097230029" superClass="com.qnx.qcc.inputType.linker">

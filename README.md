@@ -6,6 +6,7 @@ http://www.fceux.com
 
 Thanks:  FCEUX developers! 
          Jeremy Nicholl for detailed and quick responses to questions and his TCO library, and for fixing the audio init glitch.
+         crackberry.com forum members for feedback and 'offthahorseceo' for the NES pad graphics and layout
          
 Default game startup:
 
@@ -23,6 +24,22 @@ Default game startup:
 
 History
 ===========================================
+v1.0.0.9 05/01/2012
+- 3rdparty directory added with inc,lib sub dirs to avoid dependancies with external projects
+  this make the code much easier to work with for other software designers.
+  
+- new controls thanks to 'offthahorseceo' on crackberry forums thanks!
+- bluetooth confirmed working on MS 6000 keyboard
+
+  s select
+  d B
+  f A
+  arrow keys up,down,left,right
+
+- overlay display toggle control ( tap top right )
+  shift + O via BT keyboard
+
+
 v1.0.0.8 03/01/2012
 - another sdl-controls.xml with buttons moved 50 odd pixels up.
 - misc/fceux is now root directory, note: only fceux.cfg is visible via share.

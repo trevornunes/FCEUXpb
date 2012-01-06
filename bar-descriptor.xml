@@ -19,7 +19,7 @@
          Values can also be 1-part or 2-part. It is not necessary to have a 3-part value.
          An updated version of application must have a versionNumber value higher than the previous version. Required. -->
     <versionNumber>1.0.0</versionNumber>
-    <buildId>8</buildId>
+    <buildId>9</buildId>
 
     <!-- Fourth digit segment of the package version. First three segments are taken from the 
          <versionNumber> element.  Must be an integer from 0 to 2^16-1 -->
@@ -51,16 +51,19 @@
     <category>core.media</category>
     <asset path="fceux.png">fceux.png</asset>
     <asset path="sdl-controls.xml">sdl-controls.xml</asset>
-    <asset path="media/AB.png">AB.png</asset>
-    <asset path="media/dpad_horizontal.png">dpad_horizontal.png</asset>
-    <asset path="media/dpad_vert.png">dpad_vert.png</asset>
-    <asset path="media/select.png">select.png</asset>
-    <asset path="C:/fceux_vertical.png">fceux_vertical.png</asset>
-    <asset path="${workspace_loc:/SDL12/Device-Release/libSDL12.so}" type="Qnx/Elf">lib/libSDL12.so</asset>
-    <asset path="${workspace_loc:/TouchControlOverlay/Device-Release/libTouchControlOverlay.so}" type="Qnx/Elf">lib/libTouchControlOverlay.so</asset>
     <asset path="${QNX_TARGET}\..\target-override\armle-v7\usr\lib\libbps.so" type="Qnx/Elf">lib/libbps.so.1</asset>
-    <asset path="C:/Documents and Settings/tnunes/Desktop/nes.png">nes.png</asset>
-    <asset path="C:/fceux-icon.png">fceux-icon.png</asset>
+    <asset path="media/A.png">A.png</asset>
+    <asset path="media/B.png">B.png</asset>
+    <asset path="media/down.png">down.png</asset>
+    <asset path="media/left.png">left.png</asset>
+    <asset path="media/right.png">right.png</asset>
+    <asset path="media/select.png">select.png</asset>
+    <asset path="media/start.png">start.png</asset>
+    <asset path="media/up.png">up.png</asset>
+    <asset path="media/fceux-icon.png">fceux-icon.png</asset>
+    <asset path="media/nes.png">nes.png</asset>
+    <asset path="3rdparty/libs/libSDL12.so" type="Qnx/Elf">lib/libSDL12.so</asset>
+    <asset path="3rdparty/libs/libTouchControlOverlay.so" type="Qnx/Elf">lib/libTouchControlOverlay.so</asset>
     <configuration id="com.qnx.qcc.configuration.exe.debug.821991146" name="Device-Debug">
        <platformArchitecture>armle-v7</platformArchitecture>
        <asset path="Device-Debug/FCEUXpb" entry="true" type="Qnx/Elf">FCEUXpb</asset>
