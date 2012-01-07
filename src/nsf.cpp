@@ -168,6 +168,8 @@ int NSFLoad(const char *name, FCEUFILE *fp)
 {
 	int x;
 
+	fprintf(stderr,"NSFLoad ...\n");
+
 	FCEU_fseek(fp,0,SEEK_SET);
 	FCEU_fread(&NSFHeader,1,0x80,fp);
 	if(memcmp(NSFHeader.ID,"NESM\x1a",5))

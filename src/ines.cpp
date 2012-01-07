@@ -637,15 +637,21 @@ int iNESLoad(const char *name, FCEUFILE *fp, int OverwriteVidMode)
 {
 	struct md5_context md5;
 
+	fprintf(stderr,"iNESLoad ...\n");
+
 	if(FCEU_fread(&head,1,16,fp)!=16)
 		return 0;
 
 	if(memcmp(&head,"NES\x1a",4))
 		return 0;
 
-	head.cleanup();
+#ifndef __QNXNTO__
+	head.cleanup();  // causes crash on bad roms for playbook ...
+#endif
 
-	memset(&iNESCart,0,sizeof(iNESCart));
+
+	memset(&iNESCart,0,sizeof(CartInfo));
+    fprintf(stderr,"here 1.7\n");
 
 	MapperNo = (head.ROM_type>>4);
 	MapperNo|=(head.ROM_type2&0xF0);
@@ -653,6 +659,9 @@ int iNESLoad(const char *name, FCEUFILE *fp, int OverwriteVidMode)
 
 
 	//  int ROM_size=0;
+	if(!head.ROM_size)
+		fprintf(stderr,"head.ROM_size = 0\n");
+
 	if(!head.ROM_size)
 	{
 		//   FCEU_PrintError("No PRG ROM!");
@@ -698,6 +707,7 @@ int iNESLoad(const char *name, FCEUFILE *fp, int OverwriteVidMode)
 			return 0;
 		}
 	}
+
 	memset(ROM,0xFF,ROM_size<<14);
 	if(VROM_size) memset(VROM,0xFF,VROM_size<<13);
 	if(head.ROM_type&4)   /* Trainer */
@@ -712,10 +722,13 @@ int iNESLoad(const char *name, FCEUFILE *fp, int OverwriteVidMode)
 	SetupCartPRGMapping(0,ROM,ROM_size*0x4000,0);
    // SetupCartPRGMapping(1,WRAM,8192,1);
 
+
     FCEU_fread(ROM,0x4000,(round) ? ROM_size : head.ROM_size,fp);
+
 
 	if(VROM_size)
 		FCEU_fread(VROM,0x2000,head.VROM_size,fp);
+
 
 	md5_starts(&md5);
 	md5_update(&md5,ROM,ROM_size<<14);

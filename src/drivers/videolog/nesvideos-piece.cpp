@@ -16,7 +16,9 @@
 #include <string.h>   // strrchr
 #include <sys/file.h> // flock
 #include <errno.h>
+#ifndef __QNXNTO__
 #include <glob.h>
+#endif
 
 #ifdef HAVE_GD
 #include <gd.h>

@@ -191,6 +191,9 @@ int LoadGame(const char *path)
 {
   int loaded_game_ok = 0;
 
+
+  fprintf(stderr,"LoadGame\n");
+
 #ifndef __QNXNTO__
     // For Playbook we close the game when the 'rom switch' tap is made
     // then load the new rom ... don't need this. see input.cpp KeyboardCommands.
@@ -271,7 +274,7 @@ int LoadGame(const char *path)
 
 #ifdef __QNXNTO__
 	extern char g_runningFile_str[64];
-    FCEUI_DispMessage( g_runningFile_str,20);
+    FCEUI_DispMessage( g_runningFile_str,220);
 #endif
 
 	return 1;

@@ -33,13 +33,12 @@
 									<listOptionValue builtIn="false" value="__QNXNTO__"/>
 								</option>
 								<option id="com.qnx.qcc.option.compiler.includePath.957210838" name="Include Directories (-I)" superClass="com.qnx.qcc.option.compiler.includePath" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/3rdparty/inc}&quot;"/>
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/usr/include/freetype2"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/SDL12/include}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;C:\bbndk-2.0.0-beta1\target\qnx6\usr\include\cpp&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;C:\bbndk-2.0.0-beta1\target\qnx6\usr\include\cpp\c&quot;"/>
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/../target-override/usr/include"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TouchControlOverlay/public}&quot;"/>
 									<listOptionValue builtIn="false" value="/usr/include/c++/4.2.2"/>
 								</option>
 								<option id="com.qnx.qcc.option.compiler.warningLevel.1390007584" name="Warning Level (-w)" superClass="com.qnx.qcc.option.compiler.warningLevel" value="com.qnx.qcc.option.warningLevel.0" valueType="enumerated"/>
@@ -47,6 +46,7 @@
 								<option id="com.qnx.qcc.option.compiler.qccoptions.1841474113" name="QCC Options" superClass="com.qnx.qcc.option.compiler.qccoptions" valueType="stringList">
 									<listOptionValue builtIn="false" value="-lang-c++"/>
 								</option>
+								<option id="com.qnx.qcc.option.compiler.coverage.495523465" superClass="com.qnx.qcc.option.compiler.coverage" value="true" valueType="boolean"/>
 								<inputType id="com.qnx.qcc.inputType.compiler.2119535874" superClass="com.qnx.qcc.inputType.compiler"/>
 							</tool>
 							<tool id="com.qnx.qcc.tool.assembler.120131925" name="QCC Assembler" superClass="com.qnx.qcc.tool.assembler">
@@ -73,8 +73,10 @@
 								<option id="com.qnx.qcc.option.linker.security.391688014" name="Enhanced Security (-Wl,-z,relro -Wl,-z,now)" superClass="com.qnx.qcc.option.linker.security" value="true" valueType="boolean"/>
 								<option id="com.qnx.qcc.option.linker.libraryPaths.2063725076" name="Library Paths (-L)" superClass="com.qnx.qcc.option.linker.libraryPaths" valueType="libPaths">
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/../target-override/${CPUVARDIR}/lib"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/3rdparty/libs}&quot;"/>
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/../target-override/${CPUVARDIR}/usr/lib"/>
 								</option>
+								<option id="com.qnx.qcc.option.linker.coverage.124465787" superClass="com.qnx.qcc.option.linker.coverage" value="true" valueType="boolean"/>
 								<inputType id="com.qnx.qcc.inputType.linker.1698735534" superClass="com.qnx.qcc.inputType.linker">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
@@ -126,6 +128,7 @@
 									<listOptionValue builtIn="false" value="&quot;C:\bbndk-2.0.0-beta1\target\qnx6\usr\include\cpp&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;C:\bbndk-2.0.0-beta1\target\qnx6\usr\include\cpp\c&quot;"/>
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/../target-override/usr/include"/>
+									<listOptionValue builtIn="false" value="/usr/include/c++/4.2.2"/>
 								</option>
 								<option id="com.qnx.qcc.option.compiler.ccoptions.1321888992" name="Compiler Options (-Wc,)" superClass="com.qnx.qcc.option.compiler.ccoptions" valueType="stringList">
 									<listOptionValue builtIn="false" value="-Wall "/>
@@ -153,10 +156,11 @@
 								<option id="com.qnx.qcc.option.linker.security.1961149764" name="Enhanced Security (-Wl,-z,relro -Wl,-z,now)" superClass="com.qnx.qcc.option.linker.security" value="true" valueType="boolean"/>
 								<option id="com.qnx.qcc.option.linker.pie.941294353" name="Position Independent Executable (-pie)" superClass="com.qnx.qcc.option.linker.pie" value="true" valueType="boolean"/>
 								<option id="com.qnx.qcc.option.linker.libraryPaths.757796428" name="Library Paths (-L)" superClass="com.qnx.qcc.option.linker.libraryPaths" valueType="libPaths">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/3rdparty/libs}&quot;"/>
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/../target-override/${CPUVARDIR}/lib"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/3rdparty/libs}&quot;"/>
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/../target-override/${CPUVARDIR}/usr/lib"/>
 								</option>
+								<option id="com.qnx.qcc.option.linker.coverage.1785583424" superClass="com.qnx.qcc.option.linker.coverage" value="true" valueType="boolean"/>
 								<inputType id="com.qnx.qcc.inputType.linker.1097230029" superClass="com.qnx.qcc.inputType.linker">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
@@ -198,7 +202,11 @@
 									<listOptionValue builtIn="false" value="_FORTIFY_SOURCE=2"/>
 								</option>
 								<option id="com.qnx.qcc.option.compiler.includePath.549217071" name="Include Directories (-I)" superClass="com.qnx.qcc.option.compiler.includePath" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/3rdparty/inc}&quot;"/>
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/usr/include/freetype2"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;C:\bbndk-2.0.0-beta1\target\qnx6\usr\include\cpp&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;C:\bbndk-2.0.0-beta1\target\qnx6\usr\include\cpp\c&quot;"/>
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/../target-override/usr/include"/>
 									<listOptionValue builtIn="false" value="/usr/include/c++/4.2.2"/>
 								</option>
@@ -217,8 +225,10 @@
 								<option id="com.qnx.qcc.option.linker.security.857697660" name="Enhanced Security (-Wl,-z,relro -Wl,-z,now)" superClass="com.qnx.qcc.option.linker.security" value="true" valueType="boolean"/>
 								<option id="com.qnx.qcc.option.linker.libraryPaths.1081384840" name="Library Paths (-L)" superClass="com.qnx.qcc.option.linker.libraryPaths" valueType="libPaths">
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/../target-override/${CPUVARDIR}/lib"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/3rdparty/libs}&quot;"/>
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/../target-override/${CPUVARDIR}/usr/lib"/>
 								</option>
+								<option id="com.qnx.qcc.option.linker.coverage.1782366443" superClass="com.qnx.qcc.option.linker.coverage" value="true" valueType="boolean"/>
 								<inputType id="com.qnx.qcc.inputType.linker.1607386228" superClass="com.qnx.qcc.inputType.linker">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
@@ -260,7 +270,11 @@
 									<listOptionValue builtIn="false" value="_FORTIFY_SOURCE=2"/>
 								</option>
 								<option id="com.qnx.qcc.option.compiler.includePath.1363756979" name="Include Directories (-I)" superClass="com.qnx.qcc.option.compiler.includePath" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/3rdparty/inc}&quot;"/>
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/usr/include/freetype2"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;C:\bbndk-2.0.0-beta1\target\qnx6\usr\include\cpp&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;C:\bbndk-2.0.0-beta1\target\qnx6\usr\include\cpp\c&quot;"/>
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/../target-override/usr/include"/>
 									<listOptionValue builtIn="false" value="/usr/include/c++/4.2.2"/>
 								</option>
@@ -279,6 +293,7 @@
 								<option id="com.qnx.qcc.option.linker.security.723734358" name="Enhanced Security (-Wl,-z,relro -Wl,-z,now)" superClass="com.qnx.qcc.option.linker.security" value="true" valueType="boolean"/>
 								<option id="com.qnx.qcc.option.linker.libraryPaths.1437097913" name="Library Paths (-L)" superClass="com.qnx.qcc.option.linker.libraryPaths" valueType="libPaths">
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/../target-override/${CPUVARDIR}/lib"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/3rdparty/libs}&quot;"/>
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/../target-override/${CPUVARDIR}/usr/lib"/>
 								</option>
 								<inputType id="com.qnx.qcc.inputType.linker.258112912" superClass="com.qnx.qcc.inputType.linker">
@@ -320,7 +335,11 @@
 									<listOptionValue builtIn="false" value="_FORTIFY_SOURCE=2"/>
 								</option>
 								<option id="com.qnx.qcc.option.compiler.includePath.435536447" name="Include Directories (-I)" superClass="com.qnx.qcc.option.compiler.includePath" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/3rdparty/inc}&quot;"/>
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/usr/include/freetype2"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;C:\bbndk-2.0.0-beta1\target\qnx6\usr\include\cpp&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;C:\bbndk-2.0.0-beta1\target\qnx6\usr\include\cpp\c&quot;"/>
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/../target-override/usr/include"/>
 									<listOptionValue builtIn="false" value="/usr/include/c++/4.2.2"/>
 								</option>
@@ -338,8 +357,10 @@
 								<option id="com.qnx.qcc.option.linker.security.1302954429" name="Enhanced Security (-Wl,-z,relro -Wl,-z,now)" superClass="com.qnx.qcc.option.linker.security" value="true" valueType="boolean"/>
 								<option id="com.qnx.qcc.option.linker.libraryPaths.1507711282" name="Library Paths (-L)" superClass="com.qnx.qcc.option.linker.libraryPaths" valueType="libPaths">
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/../target-override/${CPUVARDIR}/lib"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/3rdparty/libs}&quot;"/>
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/../target-override/${CPUVARDIR}/usr/lib"/>
 								</option>
+								<option id="com.qnx.qcc.option.linker.coverage.1696936326" superClass="com.qnx.qcc.option.linker.coverage" value="true" valueType="boolean"/>
 								<inputType id="com.qnx.qcc.inputType.linker.1249584779" superClass="com.qnx.qcc.inputType.linker">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
@@ -380,7 +401,11 @@
 									<listOptionValue builtIn="false" value="_FORTIFY_SOURCE=2"/>
 								</option>
 								<option id="com.qnx.qcc.option.compiler.includePath.1231944954" name="Include Directories (-I)" superClass="com.qnx.qcc.option.compiler.includePath" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/3rdparty/inc}&quot;"/>
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/usr/include/freetype2"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;C:\bbndk-2.0.0-beta1\target\qnx6\usr\include\cpp&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;C:\bbndk-2.0.0-beta1\target\qnx6\usr\include\cpp\c&quot;"/>
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/../target-override/usr/include"/>
 									<listOptionValue builtIn="false" value="/usr/include/c++/4.2.2"/>
 								</option>
@@ -399,8 +424,10 @@
 								<option id="com.qnx.qcc.option.linker.security.1286302133" name="Enhanced Security (-Wl,-z,relro -Wl,-z,now)" superClass="com.qnx.qcc.option.linker.security" value="true" valueType="boolean"/>
 								<option id="com.qnx.qcc.option.linker.libraryPaths.2103328141" name="Library Paths (-L)" superClass="com.qnx.qcc.option.linker.libraryPaths" valueType="libPaths">
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/../target-override/${CPUVARDIR}/lib"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/3rdparty/libs}&quot;"/>
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/../target-override/${CPUVARDIR}/usr/lib"/>
 								</option>
+								<option id="com.qnx.qcc.option.linker.coverage.1226363781" superClass="com.qnx.qcc.option.linker.coverage" value="true" valueType="boolean"/>
 								<inputType id="com.qnx.qcc.inputType.linker.778159118" superClass="com.qnx.qcc.inputType.linker">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
@@ -441,7 +468,11 @@
 									<listOptionValue builtIn="false" value="_FORTIFY_SOURCE=2"/>
 								</option>
 								<option id="com.qnx.qcc.option.compiler.includePath.252260496" name="Include Directories (-I)" superClass="com.qnx.qcc.option.compiler.includePath" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/3rdparty/inc}&quot;"/>
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/usr/include/freetype2"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;C:\bbndk-2.0.0-beta1\target\qnx6\usr\include\cpp&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;C:\bbndk-2.0.0-beta1\target\qnx6\usr\include\cpp\c&quot;"/>
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/../target-override/usr/include"/>
 									<listOptionValue builtIn="false" value="/usr/include/c++/4.2.2"/>
 								</option>
@@ -460,6 +491,7 @@
 								<option id="com.qnx.qcc.option.linker.security.928475083" name="Enhanced Security (-Wl,-z,relro -Wl,-z,now)" superClass="com.qnx.qcc.option.linker.security" value="true" valueType="boolean"/>
 								<option id="com.qnx.qcc.option.linker.libraryPaths.1061359210" name="Library Paths (-L)" superClass="com.qnx.qcc.option.linker.libraryPaths" valueType="libPaths">
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/../target-override/${CPUVARDIR}/lib"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/3rdparty/libs}&quot;"/>
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/../target-override/${CPUVARDIR}/usr/lib"/>
 								</option>
 								<inputType id="com.qnx.qcc.inputType.linker.1252123862" superClass="com.qnx.qcc.inputType.linker">
@@ -510,4 +542,5 @@
 		</scannerConfigBuildInfo>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
+	<storageModule moduleId="com.qnx.tools.ide.qde.core.QNXProjectProperties"/>
 </cproject>

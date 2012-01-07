@@ -461,6 +461,8 @@ FCEUGI *FCEUI_LoadGameVirtual(const char *name, int OverwriteVidMode)
 	GameInfo->inputfc=SIFC_UNSET;
 	GameInfo->cspecial=SIS_NONE;
 
+	fprintf(stderr,"LoadGameVirtual: Trying iNESLoad and other formats\n");
+
 	//try to load each different format
 	bool FCEUXLoad(const char *name, FCEUFILE *fp);
 	/*if(FCEUXLoad(name,fp))
@@ -473,6 +475,8 @@ FCEUGI *FCEUI_LoadGameVirtual(const char *name, int OverwriteVidMode)
 		goto endlseq;
 	if(FDSLoad(name,fp))
 		goto endlseq;
+
+	fprintf(stderr,"LoadGameVirtual: loader OK\n");
 
 	FCEU_PrintError("An error occurred while loading the file.");
 	FCEU_fclose(fp);

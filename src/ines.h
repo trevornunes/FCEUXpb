@@ -88,6 +88,8 @@ struct iNES_HEADER {
 
 	void cleanup()
 	{
+	  try
+	  {
 		if(!memcmp((char *)(this)+0x7,"DiskDude",8))
 		{
 			memset((char *)(this)+0x7,0,0x9);
@@ -105,6 +107,12 @@ struct iNES_HEADER {
 			else
 				memset((char *)(this)+0xA,0,0x6);
 		}
+	  }
+	  catch(...)
+	  {
+		fprintf(stderr,"CRITICAL: ines.h try/catch for cleanup...\n");
+	  }
+
 	}
 };
 extern struct iNES_HEADER head; //for mappers usage

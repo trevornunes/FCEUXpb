@@ -258,6 +258,8 @@ FCEUFILE * FCEU_fopen(const char *path, const char *ipsfn, char *mode, char *ext
 	FILE *ipsfile=0;
 	FCEUFILE *fceufp=0;
 
+	fprintf(stderr,"FCEU_fopen\n");
+
 	bool read = (std::string)mode == "rb";
 	bool write = (std::string)mode == "wb";
 	if((read&&write) || (!read&&!write))
@@ -265,6 +267,8 @@ FCEUFILE * FCEU_fopen(const char *path, const char *ipsfn, char *mode, char *ext
 		FCEU_PrintError("invalid file open mode specified (only wb and rb are supported)");
 		return 0;
 	}
+
+	fprintf(stderr,"FCEU_fopen:  calls FCEU_SplitArchiveFileName\n");
 
 	std::string archive,fname,fileToOpen;
 	FCEU_SplitArchiveFilename(path,archive,fname,fileToOpen);
@@ -279,6 +283,8 @@ FCEUFILE * FCEU_fopen(const char *path, const char *ipsfn, char *mode, char *ext
 		asr.files.FilterByExtension(extensions);
 		if(!asr.isArchive())
 		{
+			fprintf(stderr,"FCEU_fopen: not an archive ...\n");
+
 			//if the archive contained no files, try to open it the old fashioned way
 			EMUFILE_FILE* fp = FCEUD_UTF8_fstream(fileToOpen,mode);
 			if(!fp || (fp->get_fp() == NULL))
@@ -288,7 +294,10 @@ FCEUFILE * FCEU_fopen(const char *path, const char *ipsfn, char *mode, char *ext
 			}
 
 			//try to read a zip file
+
 			{
+				fprintf(stderr,"FCEU_fopen: zip ...\n");
+
 				fceufp = TryUnzip(fileToOpen);
 				if(fceufp) {
 					delete fp;
@@ -336,6 +345,8 @@ FCEUFILE * FCEU_fopen(const char *path, const char *ipsfn, char *mode, char *ext
 			}
 
 		
+			fprintf(stderr,"FCEU_fopen: regular file\n");
+
 			//open a plain old file
 			fceufp = new FCEUFILE();
 			fceufp->filename = fileToOpen;

@@ -91,7 +91,7 @@ if(!dpath)
 		if( direntp == NULL )
 		  break;
 
-		// fprintf(stderr,"FILE: '%s' \n", direntp->d_name);
+		 fprintf(stderr,"FILE: '%s' \n", direntp->d_name);
 		// FCEUI_DispMessage(direntp->d_name,0);
 		  string tmp = direntp->d_name;
 
@@ -117,7 +117,7 @@ if(!dpath)
   }
 
 #endif
- //fprintf(stderr,"number of files %d\n", vsList.size() )
+ fprintf(stderr,"number of files %d\n", vsList.size() );
 return vsList;
 }
 
@@ -145,7 +145,10 @@ int AutoLoadRom(void)
     vecList = GetRomDirListing("/accounts/1000/shared/misc/roms/nes");
     string baseDir ="/accounts/1000/shared/misc/roms/nes/";
 
-    if(gameIndex++ > vecList.size())
+    if(++gameIndex > vecList.size())
+    	gameIndex = 0;
+
+    if( vecList.size() == 1)
     	gameIndex = 0;
 
     memset(&g_runningFile_str[0],0,64);
@@ -157,7 +160,6 @@ int AutoLoadRom(void)
    bool paused = FCEUI_EmulationPaused();
    if(!paused)
  	    FCEUI_ToggleEmulationPause();
-
 
    FCEUI_CloseGame();
   // SDL_Delay(50);  // not sure if needed ... feels right :-)
@@ -568,14 +570,12 @@ KeyboardCommands()
     // Alt-Enter to toggle full-screen
     if(keyonly(O) && is_shift) {
         FCEUI_DispMessage("toggle control gfx", 210);
-    	tco_toggle_showlabels();
+    	//tco_load_defaultcontrols(g_tco_context_ptr);
     }
     
    if(keyonly(L) & is_shift)
    {
-	   FCEUI_DispMessage("loading custom control",210);
-	   extern tco_context_t *g_tco_context_ptr;
-	   tco_loadcontrols(g_tco_context_ptr, "/accounts/1000/shared/misc/fceux/cust-controls.xml");
+	 AutoLoadRom();
    }
 
     // Toggle Movie auto-backup
@@ -714,11 +714,20 @@ KeyboardCommands()
         }
     }
     
+#ifndef __QNXNTO__
     if(_keyonly(Hotkeys[HK_RESET])) {
-       // FCEUI_ResetNES();
-       fprintf(stderr,"toggle show labels\n");
-       tco_toggle_showlabels();
+       FCEUI_ResetNES();
     }
+
+#else
+    if(_keyonly(Hotkeys[HK_RESET]))
+    {
+       FCEUI_DispMessage("reset control",210);
+       extern tco_context_t *g_tco_context_ptr;
+      // tco_loadcontrols(g_tco_context_ptr, "/accounts/1000/shared/misc/fceux/cust-controls.xml");
+      // tco_load_defaultcontrols(g_tco_contenxt_ptr);
+    }
+#endif
     //if(_keyonly(Hotkeys[HK_POWER])) {
     //    FCEUI_PowerNES();
     //}
@@ -768,7 +777,7 @@ KeyboardCommands()
 
       if( failAttempts++ > 10)
       {
-        FCEU_DispMessage("tried 10 times to load a rom, giving up...",0);
+        FCEU_DispMessage("tried 10 times to load a rom, giving up...",220);
         SDL_Delay(2000);
       }
      }
