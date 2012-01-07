@@ -38,6 +38,10 @@ int DWaitButton(const uint8 *text, ButtConfig *bc, int wb);
 
 #define SDL_FCEU_HOTKEY_EVENT	SDL_USEREVENT
 
+#ifdef __QNXNTO__
+void UpdateRomList(void);
+#endif
+
 void InitInputInterface(void);
 void InputUserActiveFix(void);
 

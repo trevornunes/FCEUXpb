@@ -873,6 +873,7 @@ int main(int argc, char *argv[])
 	}
 #else
 	extern void AutoLoadRom(void);  // sick ... fix me.
+	UpdateRomList();
 	AutoLoadRom();
 #endif
 	

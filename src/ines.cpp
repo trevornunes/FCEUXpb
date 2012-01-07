@@ -651,7 +651,6 @@ int iNESLoad(const char *name, FCEUFILE *fp, int OverwriteVidMode)
 
 
 	memset(&iNESCart,0,sizeof(CartInfo));
-    fprintf(stderr,"here 1.7\n");
 
 	MapperNo = (head.ROM_type>>4);
 	MapperNo|=(head.ROM_type2&0xF0);

@@ -62,12 +62,14 @@ extern bool bindSavestate, frameAdvanceLagSkip, lagCounterDisplay;
 
 
 
+static vector<string> vsList;
+
 //
 //
 //
 vector<string> GetRomDirListing( const char *dpath )
 {
- vector<string> vsList;
+ //vector<string> vsList;
 
 #ifdef __QNXNTO__
 	DIR* dirp;
@@ -126,6 +128,7 @@ return vsList;
 char g_runningFile_str[64];
 #ifdef __QNXNTO__
 static pthread_mutex_t loader_mutex = PTHREAD_MUTEX_INITIALIZER;
+static vector<string> vecList;
 #endif
 
 //
@@ -138,17 +141,22 @@ int AutoLoadRom(void)
 
     pthread_mutex_lock(&loader_mutex);
 
-	vector<string> vecList;
+	if( vecList.size() == 0)
+	{
+	   fprintf(stderr,"AutoLoadRom: error no games in vecList\n");
+	   return -1;
+	}
 
 	fprintf(stderr,"AutoLoadRom\n");
-
-    vecList = GetRomDirListing("/accounts/1000/shared/misc/roms/nes");
     string baseDir ="/accounts/1000/shared/misc/roms/nes/";
 
-    if(++gameIndex > vecList.size())
+    if(++gameIndex >= vecList.size())
     	gameIndex = 0;
 
     if( vecList.size() == 1)
+    	gameIndex = 0;
+
+    if( gameIndex == vecList.size())
     	gameIndex = 0;
 
     memset(&g_runningFile_str[0],0,64);
@@ -175,7 +183,10 @@ int AutoLoadRom(void)
    return status;
 }
 
-
+void UpdateRomList(void)
+{
+  vecList = GetRomDirListing("/accounts/1000/shared/misc/roms/nes");
+}
 
 
 
