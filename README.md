@@ -10,20 +10,42 @@ Thanks:  FCEUX developers!
          
 Default game startup:
 
-1. Create a directory called z:/misc/nes/roms 
-
+1. Create a directory on your playbook in the 'misc' folder e.g.  z:/misc/nes/roms 
 2. Put your .nes files ( .zip not supported yet ) in this directory.
-   
 3. You can tap the top left portion of the screen and it will autoload the next rom in the directory.  
-
 4. Swipe down from top of screen to see the TCO controls layout
    - You can move each 'key' around as you like, the game will pause during this time, swipe down again to go back.
 
-         
+5. misc/fceux/tco.xml  will override the built in control layout
+   you can reference images from here as well just put in the full path
+   e.g.  /accounts/1000/shared/misc/fceux/mybutton.png
+   they must be .png and I recommend 24bit with transparency.
 
+6. top of screen in the middle contains 2 invisible SAVE,LOAD buttons
+   swipe down to see the location..
+   hitting save triggers a snapshot save
+   hitting load triggers a snapshot load
+
+../misc/fceux/  contains config, snapshots etc for the emulator core.
+ 
 
 History
 ===========================================
+
+v1.0.0.14-16
+- custom touch control xml loading from misc/fceux/tco.xml or misc/tco.xml
+  requires the modified 3rdparty/lib/libsdl12.so file for now.
+- snapshot save and load buttons
+- changed the top right button to 'coin input' for Vs. games
+
+v1.0.0.13 - minor cleanup, attempt to fix access privilege 
+            on misc/fceux/xxx dirs.
+            2 new hidden buttons top middle of screen for save=95, load=97
+            
+
+v1.0.0.12 - fixed some rom loading glitches ...
+            bit banging the ROM header somehow trashed the emu
+            
 v1.0.0.9 05/01/2012
 - 3rdparty directory added with inc,lib sub dirs to avoid dependancies with external projects
   this make the code much easier to work with for other software designers.

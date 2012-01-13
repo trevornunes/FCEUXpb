@@ -19,7 +19,7 @@
          Values can also be 1-part or 2-part. It is not necessary to have a 3-part value.
          An updated version of application must have a versionNumber value higher than the previous version. Required. -->
     <versionNumber>1.0.0</versionNumber>
-    <buildId>12</buildId>
+    <buildId>16</buildId>
 
     <!-- Fourth digit segment of the package version. First three segments are taken from the 
          <versionNumber> element.  Must be an integer from 0 to 2^16-1 -->
@@ -64,6 +64,8 @@
     <asset path="media/nes.png">nes.png</asset>
     <asset path="3rdparty/libs/libSDL12.so" type="Qnx/Elf">lib/libSDL12.so</asset>
     <asset path="3rdparty/libs/libTouchControlOverlay.so" type="Qnx/Elf">lib/libTouchControlOverlay.so</asset>
+    <asset path="media/save.png">save.png</asset>
+    <asset path="media/load.png">load.png</asset>
     <configuration id="com.qnx.qcc.configuration.exe.debug.821991146" name="Device-Debug">
        <platformArchitecture>armle-v7</platformArchitecture>
        <asset path="Device-Debug/FCEUXpb" entry="true" type="Qnx/Elf">FCEUXpb</asset>

@@ -34,6 +34,9 @@
 </key>
 
 <key x="0" y="0" width="25" height="25" sym="48" scancode="254"/>
-<key x="218" y="0" width="25" height="25" sym="292" scancode="292"/>
+<key x="218" y="0" width="25" height="25" sym="287" scancode="287"/>
+
+<key x="90" y="0" width="25" height="25" sym="286" scancode="286" image="save.png"/>
+<key x="130" y="0" width="25" height="25" sym="288" scancode="288" image="load.png"/>
 
 </emulation>

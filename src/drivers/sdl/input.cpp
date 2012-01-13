@@ -61,9 +61,17 @@ extern bool bindSavestate, frameAdvanceLagSkip, lagCounterDisplay;
 
 
 
-
+char g_runningFile_str[64];
+static int gameIndex = 0;
 static vector<string> vsList;
 
+void ShowRomInfo()
+{
+   char msg[128];
+   memset( &msg[0], 0, 128);
+   sprintf( &msg[0], "%d/%d %s" , gameIndex, vsList.size(), g_runningFile_str );
+   FCEUI_DispMessage(msg,220);
+}
 //
 //
 //
@@ -125,7 +133,6 @@ return vsList;
 
 
 
-char g_runningFile_str[64];
 #ifdef __QNXNTO__
 static pthread_mutex_t loader_mutex = PTHREAD_MUTEX_INITIALIZER;
 static vector<string> vecList;
@@ -136,7 +143,7 @@ static vector<string> vecList;
 //
 int AutoLoadRom(void)
 {
-    static int gameIndex;
+   // static int gameIndex;
     int status = 0;
 
     pthread_mutex_lock(&loader_mutex);

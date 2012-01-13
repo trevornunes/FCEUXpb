@@ -273,8 +273,9 @@ int LoadGame(const char *path)
 	isloaded = 1;
 
 #ifdef __QNXNTO__
-	extern char g_runningFile_str[64];
-    FCEUI_DispMessage( g_runningFile_str,220);
+	//extern char g_runningFile_str[64];
+	//FCEUI_DispMessage( g_runningFile_str,220);
+    ShowRomInfo();
 #endif
 
 	return 1;
