@@ -136,11 +136,36 @@ return vsList;
 #ifdef __QNXNTO__
 static pthread_mutex_t loader_mutex = PTHREAD_MUTEX_INITIALIZER;
 static vector<string> vecList;
+static vector<string> sortedvecList;
 #endif
 
 //
 //
 //
+vector<string> sortAlpha(vector<string> sortThis)
+{
+     int swap;
+     string temp;
+
+     do
+     {
+         swap = 0;
+         for (int count = 0; count < sortThis.size() - 1; count++)
+         {
+             if (sortThis.at(count) > sortThis.at(count + 1))
+             {
+                   temp = sortThis.at(count);
+                   sortThis.at(count) = sortThis.at(count + 1);
+                   sortThis.at(count + 1) = temp;
+                   swap = 1;
+             }
+         }
+     }while (swap != 0);
+
+     return sortThis;
+}
+
+
 int AutoLoadRom(void)
 {
    // static int gameIndex;
@@ -148,7 +173,7 @@ int AutoLoadRom(void)
 
     pthread_mutex_lock(&loader_mutex);
 
-	if( vecList.size() == 0)
+	if( sortedvecList.size() == 0)
 	{
 	   fprintf(stderr,"AutoLoadRom: error no games in vecList\n");
 	   return -1;
@@ -157,20 +182,20 @@ int AutoLoadRom(void)
 	fprintf(stderr,"AutoLoadRom\n");
     string baseDir ="/accounts/1000/shared/misc/roms/nes/";
 
-    if(++gameIndex >= vecList.size())
+    if(++gameIndex >= sortedvecList.size())
     	gameIndex = 0;
 
     if( vecList.size() == 1)
     	gameIndex = 0;
 
-    if( gameIndex == vecList.size())
+    if( gameIndex == sortedvecList.size())
     	gameIndex = 0;
 
     memset(&g_runningFile_str[0],0,64);
-    sprintf(&g_runningFile_str[0], vecList[gameIndex].c_str());
+    sprintf(&g_runningFile_str[0], sortedvecList[gameIndex].c_str());
 
-    baseDir = baseDir + vecList[gameIndex];
-    fprintf(stderr,"loading: %d/%d '%s'\n",gameIndex, vecList.size(), baseDir.c_str() );
+    baseDir = baseDir + sortedvecList[gameIndex];
+    fprintf(stderr,"loading: %d/%d '%s'\n",gameIndex + 1, sortedvecList.size(), baseDir.c_str() );
 
    bool paused = FCEUI_EmulationPaused();
    if(!paused)
@@ -190,9 +215,12 @@ int AutoLoadRom(void)
    return status;
 }
 
-void UpdateRomList(void)
+void 
+
+RomList(void)
 {
   vecList = GetRomDirListing("/accounts/1000/shared/misc/roms/nes");
+  sortedvecList = sortAlpha(vecList);
 }
 
 
