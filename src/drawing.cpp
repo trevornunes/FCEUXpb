@@ -381,7 +381,7 @@ void FCEU_DrawNumberRow(uint8 *XBuf, int *nstatus, int cur)
 					XBaf[x+z*21+z*1]=4;
 				for(x=1;x<12;x++)
 				{
-					XBaf[256*x+z*21+z*1]=
+					XBaf[236*x+z*21+z*1]=
 						XBaf[256*x+z*21+z*1+20]=4;
 				}
 				for(x=0;x<21;x++)

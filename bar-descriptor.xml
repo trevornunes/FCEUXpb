@@ -19,7 +19,7 @@
          Values can also be 1-part or 2-part. It is not necessary to have a 3-part value.
          An updated version of application must have a versionNumber value higher than the previous version. Required. -->
     <versionNumber>1.0.0</versionNumber>
-    <buildId>16</buildId>
+    <buildId>17</buildId>
 
     <!-- Fourth digit segment of the package version. First three segments are taken from the 
          <versionNumber> element.  Must be an integer from 0 to 2^16-1 -->
@@ -54,18 +54,20 @@
     <asset path="${QNX_TARGET}\..\target-override\armle-v7\usr\lib\libbps.so" type="Qnx/Elf">lib/libbps.so.1</asset>
     <asset path="media/A.png">A.png</asset>
     <asset path="media/B.png">B.png</asset>
-    <asset path="media/down.png">down.png</asset>
-    <asset path="media/left.png">left.png</asset>
-    <asset path="media/right.png">right.png</asset>
     <asset path="media/select.png">select.png</asset>
     <asset path="media/start.png">start.png</asset>
-    <asset path="media/up.png">up.png</asset>
     <asset path="media/fceux-icon.png">fceux-icon.png</asset>
     <asset path="media/nes.png">nes.png</asset>
     <asset path="3rdparty/libs/libSDL12.so" type="Qnx/Elf">lib/libSDL12.so</asset>
     <asset path="3rdparty/libs/libTouchControlOverlay.so" type="Qnx/Elf">lib/libTouchControlOverlay.so</asset>
     <asset path="media/save.png">save.png</asset>
     <asset path="media/load.png">load.png</asset>
+    <asset path="media/dpad.png">dpad.png</asset>
+    <asset path="media/1.png">1.png</asset>
+    <asset path="media/2.png">2.png</asset>
+    <asset path="media/3.png">3.png</asset>
+    <asset path="media/4.png">4.png</asset>
+    <asset path="media/0.png">0.png</asset>
     <configuration id="com.qnx.qcc.configuration.exe.debug.821991146" name="Device-Debug">
        <platformArchitecture>armle-v7</platformArchitecture>
        <asset path="Device-Debug/FCEUXpb" entry="true" type="Qnx/Elf">FCEUXpb</asset>

@@ -874,7 +874,7 @@ int FCEUI_SelectState(int w, int show)
 	if(show)
 	{
 		StateShow=180;
-		FCEU_DispMessage("-select state-",0);
+		FCEU_DispMessage("select save slot...",180);
 	}
 	return oldstate;
 }

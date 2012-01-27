@@ -101,7 +101,7 @@ if(!dpath)
 		if( direntp == NULL )
 		  break;
 
-		 fprintf(stderr,"FILE: '%s' \n", direntp->d_name);
+		// fprintf(stderr,"FILE: '%s' \n", direntp->d_name);
 		// FCEUI_DispMessage(direntp->d_name,0);
 		  string tmp = direntp->d_name;
 
@@ -171,6 +171,8 @@ int AutoLoadRom(void)
    // static int gameIndex;
     int status = 0;
 
+    // The only reason we have a mutex here, is to ensure touch events don't
+    // trigger an autoload while an autoload is in progress... we want this atomic
     pthread_mutex_lock(&loader_mutex);
 
 	if( sortedvecList.size() == 0)
@@ -202,7 +204,6 @@ int AutoLoadRom(void)
  	    FCEUI_ToggleEmulationPause();
 
    FCEUI_CloseGame();
-  // SDL_Delay(50);  // not sure if needed ... feels right :-)
    status = LoadGame( baseDir.c_str() );
 
    if( status == 0)
@@ -215,9 +216,7 @@ int AutoLoadRom(void)
    return status;
 }
 
-void 
-
-RomList(void)
+void UpdateRomList(void)
 {
   vecList = GetRomDirListing("/accounts/1000/shared/misc/roms/nes");
   sortedvecList = sortAlpha(vecList);
@@ -790,7 +789,11 @@ KeyboardCommands()
     }
     #endif
 	
-	for(int i=0; i<10; i++)
+// trev- There are 4 save states, 4 save states!
+// trev- Don't want to clutter the screen so we only use slots 0-3 for now.
+
+
+	for(int i=0; i<4; i++)
 		if(_keyonly(Hotkeys[HK_SELECT_STATE_0 + i]))
 		{
 #ifdef _GTK

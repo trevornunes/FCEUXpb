@@ -23,14 +23,21 @@ Default game startup:
 
 6. top of screen in the middle contains 2 invisible SAVE,LOAD buttons
    swipe down to see the location..
-   hitting save triggers a snapshot save
-   hitting load triggers a snapshot load
+   tap the button image 0,1,2 or 3 and then hit save or load ...
+   hitting save triggers a snapshot save default slot 0
+   hitting load triggers a snapshot load default slot 0
 
 ../misc/fceux/  contains config, snapshots etc for the emulator core.
  
 
 History
 ===========================================
+
+v1.0.0.17
+- sorted rom listing thanks to contributor hlx (Justin Tokarchuk) cheers!
+- 4 save slot selector added 0-3 for save/load snapshots
+- switched to DPAD control to get diagonals and it just feels better.
+
 
 v1.0.0.14-16
 - custom touch control xml loading from misc/fceux/tco.xml or misc/tco.xml
