@@ -10,9 +10,9 @@ Thanks:  FCEUX developers!
          
 Default game startup:
 
-1. Create a directory on your playbook in the 'misc' folder e.g.  z:/misc/nes/roms 
+1. On first run, the ROM directory on your playbook in the 'misc' folder e.g. misc/nes/roms will be created for you.
 2. Put your .nes files ( .zip not supported yet ) in this directory.
-3. You can tap the top left portion of the screen and it will autoload the next rom in the directory.  
+3. You can tap the top left portion of the screen and it will present you with a ROM selector.  
 4. Swipe down from top of screen to see the TCO controls layout
    - You can move each 'key' around as you like, the game will pause during this time, swipe down again to go back.
 
@@ -32,6 +32,11 @@ Default game startup:
 
 History
 ===========================================
+v1.0.1.1-2 (jtokarchuk emulator refresh project)
+- added visual ROM selector functionality.
+- misc/roms/nes directory will be created if missing.
+- if you have no roms, you will be presented with a dialog that gives you 
+  instructions.
 
 v1.0.0.17
 - sorted rom listing thanks to contributor hlx (Justin Tokarchuk) cheers!

@@ -18,8 +18,8 @@
     <!-- A string value of the format <0-999>.<0-999>.<0-999> that represents application version which can be used to check for application upgrade. 
          Values can also be 1-part or 2-part. It is not necessary to have a 3-part value.
          An updated version of application must have a versionNumber value higher than the previous version. Required. -->
-    <versionNumber>1.0.0</versionNumber>
-    <buildId>810</buildId>
+    <versionNumber>1.0.1</versionNumber>
+    <buildId>1</buildId>
 
     <!-- Fourth digit segment of the package version. First three segments are taken from the 
          <versionNumber> element.  Must be an integer from 0 to 2^16-1 -->
@@ -51,7 +51,6 @@
     <category>core.media</category>
     <asset path="fceux.png">fceux.png</asset>
     <asset path="sdl-controls.xml">sdl-controls.xml</asset>
-    <asset path="${QNX_TARGET}\..\target-override\armle-v7\usr\lib\libbps.so" type="Qnx/Elf">lib/libbps.so.1</asset>
     <asset path="media/A.png">A.png</asset>
     <asset path="media/B.png">B.png</asset>
     <asset path="media/select.png">select.png</asset>

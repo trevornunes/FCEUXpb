@@ -51,6 +51,9 @@ using namespace std;
 #ifdef __QNXNTO__
 #include <dirent.h>
 #include <pthread.h>  // mutex
+#include <bps/dialog.h>
+#include <bps/bps.h>
+#include <bps/event.h>
 #include "touchcontroloverlay.h"  // tco_xxxx functions for touch input control
 #endif
 
@@ -62,7 +65,7 @@ extern bool bindSavestate, frameAdvanceLagSkip, lagCounterDisplay;
 
 
 char g_runningFile_str[64];
-static int gameIndex = 0;
+int gameIndex = 0;
 static vector<string> vsList;
 
 void ShowRomInfo()
@@ -128,7 +131,66 @@ if(!dpath)
 
 #endif
  fprintf(stderr,"number of files %d\n", vsList.size() );
-return vsList;
+
+ if(vsList.size() == 0) {
+
+	 dialog_instance_t alert_dialog = 0;
+	 dialog_request_events(0);    //0 indicates that all events are requested
+	 if (dialog_create_alert(&alert_dialog) != BPS_SUCCESS) {
+		 fprintf(stderr, "Failed to create alert dialog.");
+     //return EXIT_FAILURE;
+	 }
+	 dialog_set_title_text(alert_dialog, "FCEUXpb Error Report");
+	 if (dialog_set_alert_html_message_text(alert_dialog, "<u><b>ERROR:</b> You do not have any ROMS!<br></u><b>Add NES ROMS to:</b> <br><u>\"shared/misc/roms/nes\"</u><br>using either <i>WiFi sharing</i> or <i>Desktop Software.</i>")
+			 != BPS_SUCCESS) {
+		 fprintf(stderr, "Failed to set alert dialog message text.");
+		 dialog_destroy(alert_dialog);
+		 alert_dialog = 0;
+       //return EXIT_FAILURE;
+	 }
+
+	 char* cancel_button_context = "Cancelled";
+
+	 if (dialog_add_button(alert_dialog, "OK", true, 0, true)
+			 != BPS_SUCCESS) {
+		 fprintf(stderr, "Failed to add button to alert dialog.");
+		 dialog_destroy(alert_dialog);
+		 alert_dialog = 0;
+       //return EXIT_FAILURE;
+	 }
+
+	 if (dialog_show(alert_dialog) != BPS_SUCCESS) {
+		 fprintf(stderr, "Failed to show alert dialog.");
+		 dialog_destroy(alert_dialog);
+		 alert_dialog = 0;
+		 //return EXIT_FAILURE;
+	 }
+
+	 while (1) {
+		 bps_event_t *event = NULL;
+		 bps_get_event(&event, -1);    // -1 means that the function waits
+                                   // for an event before returning
+
+		 if (event) {
+			 if (bps_event_get_domain(event) == dialog_get_domain()) {
+
+				 int selectedIndex =
+						 dialog_event_get_selected_index(event);
+				 const char* label =
+						 dialog_event_get_selected_label(event);
+				 const char* context =
+						 dialog_event_get_selected_context(event);
+
+				 exit(-1);
+			 }
+		 }
+	 }
+
+	 if (alert_dialog) {
+		 dialog_destroy(alert_dialog);
+	 }
+ }
+	 return vsList;
 }
 
 
@@ -169,11 +231,70 @@ vector<string> sortAlpha(vector<string> sortThis)
 int AutoLoadRom(void)
 {
    // static int gameIndex;
-    int status = 0;
+	int status = 0;
 
-    // The only reason we have a mutex here, is to ensure touch events don't
-    // trigger an autoload while an autoload is in progress... we want this atomic
-    pthread_mutex_lock(&loader_mutex);
+	    pthread_mutex_lock(&loader_mutex);
+	    const char ** list = 0;
+	    int count = 0;
+	    list = (const char**)malloc(sortedvecList.size()*sizeof(char*));
+
+
+
+	    for(;;){
+	    	if(count >= sortedvecList.size()) break;
+	    	fprintf(stderr, "%d \n", count);
+	    	list[count] = sortedvecList[count].c_str();
+	    	count++;
+	    }
+
+	    // ROM selector
+	       dialog_instance_t dialog = 0;
+	       int i, rc;
+	       bps_event_t *event;
+	       int domain = 0;
+	       const char * label;
+	       char romfilename[256];
+	       dialog_create_popuplist(&dialog);
+	       dialog_set_popuplist_items(dialog, list, sortedvecList.size());
+
+	           char* cancel_button_context = "Canceled";
+	           char* okay_button_context = "Okay";
+	           dialog_add_button(dialog, DIALOG_CANCEL_LABEL, true, cancel_button_context, true);
+	           dialog_add_button(dialog, DIALOG_OK_LABEL, true, okay_button_context, true);
+	           dialog_set_popuplist_multiselect(dialog, false);
+	           dialog_show(dialog);
+
+	           while(1){
+	               bps_get_event(&event, -1);
+
+	               if (event) {
+	                   domain = bps_event_get_domain(event);
+	                   if (domain == dialog_get_domain()) {
+	                       int *response[1];
+	                       int num;
+
+	                       label = dialog_event_get_selected_label(event);
+
+	                       if(strcmp(label, DIALOG_OK_LABEL) == 0){
+	                           dialog_event_get_popuplist_selected_indices(event, (int**)response, &num);
+	                           if(num != 0){
+	                               //*response[0] is the index that was selected
+	                               printf("%s", list[*response[0]]);fflush(stdout);
+	                               strcpy(romfilename, list[*response[0]]);
+	                               gameIndex = (*response[0] + 1);
+	                           }
+	                           bps_free(response[0]);
+	                       } else {
+	                           printf("User has canceled ISO dialog.");
+	                           return false;
+	                       }
+	                       break;
+	                   }
+	               }
+	           }
+
+
+
 
 	if( sortedvecList.size() == 0)
 	{
@@ -184,20 +305,11 @@ int AutoLoadRom(void)
 	fprintf(stderr,"AutoLoadRom\n");
     string baseDir ="/accounts/1000/shared/misc/roms/nes/";
 
-    if(++gameIndex >= sortedvecList.size())
-    	gameIndex = 0;
-
-    if( vecList.size() == 1)
-    	gameIndex = 0;
-
-    if( gameIndex == sortedvecList.size())
-    	gameIndex = 0;
-
     memset(&g_runningFile_str[0],0,64);
-    sprintf(&g_runningFile_str[0], sortedvecList[gameIndex].c_str());
+    sprintf(&g_runningFile_str[0], romfilename);
 
-    baseDir = baseDir + sortedvecList[gameIndex];
-    fprintf(stderr,"loading: %d/%d '%s'\n",gameIndex + 1, sortedvecList.size(), baseDir.c_str() );
+    baseDir = baseDir + romfilename;
+    fprintf(stderr,"loading: %d/%d '%s'\n",count, sortedvecList.size(), baseDir.c_str() );
 
    bool paused = FCEUI_EmulationPaused();
    if(!paused)
@@ -212,8 +324,10 @@ int AutoLoadRom(void)
    }
 
    pthread_mutex_unlock(&loader_mutex);  // -lpthread normally would be added, it's already in PB runtime.
+   free(list);
 
    return status;
+
 }
 
 void UpdateRomList(void)
@@ -818,19 +932,7 @@ KeyboardCommands()
 #ifndef __QNXNTO__
     	lagCounterDisplay ^= 1;
 #else
-     int failAttempts = 0;
-     while(1)
-     {
-      if( AutoLoadRom() == 1) // if rom load works break out, else iterate through list again.
-    	  break;
-
-      if( failAttempts++ > 10)
-      {
-        FCEU_DispMessage("tried 10 times to load a rom, giving up...",220);
-        SDL_Delay(2000);
-      }
-     }
-
+     AutoLoadRom();
 #endif
     }
     
