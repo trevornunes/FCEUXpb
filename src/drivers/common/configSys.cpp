@@ -596,6 +596,7 @@ Config::_load()
         config.open(configFile.c_str(), std::ios::in | std::ios::out);
         if(!config.is_open()) {
             // XXX file couldn't be opened?
+        	fprintf(stderr,"failed to load config file.\n");
             return 0;
         }
 

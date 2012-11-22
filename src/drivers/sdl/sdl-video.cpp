@@ -146,8 +146,11 @@ void FCEUD_VideoChanged()
 		PAL = 1;
 	else
 		PAL = 0;
+
+	fprintf(stderr,"mode is %s\n", PAL ? "pal" : "ntsc");
 }
-/**
+
+/*
  * Attempts to initialize the graphical video display.  Returns 0 on
  * success, -1 on failure.
  */
@@ -220,6 +223,8 @@ InitVideo(FCEUGI *gi)
     }
     
     // check if we are rendering fullscreen
+
+
     if(s_fullscreen) {
         flags |= SDL_FULLSCREEN;
         SDL_ShowCursor(0);

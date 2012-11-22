@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <emulation version="1">
 
-<dpad x="2" y="160" height="56" width="56">
-<label x="0" y="0"  height="56" width="56" image="dpad.png"/>
+<dpad x="2" y="140" height="80" width="80">
+<label x="0" y="0"  height="80" width="80" image="dpad.png"/>
 </dpad>
 
 
-<key x="90" y="185" width="32" height="32" sym="115" scancode="115">
-<label x="2" y="8" width="32" height="32" image="select.png"/>
+<key x="335" y="35" width="40" height="40" sym="115" scancode="115">
+<label x="0" y="0" width="40" height="22" image="select.png"/>
 </key>
 
-<key x="124" y="185" width="32" height="32" sym="13" scancode="13">
-<label x="0" y="8" width="32" height="32" image="start.png"/>
+<key x="335" y="85" width="40" height="40" sym="13" scancode="13">
+<label x="0" y="0" width="40" height="22" image="start.png"/>
 </key>
 
-<key x="175" y="190" width="32" height="32" sym="100" scancode="100">
-<label x="0" y="4" width="24" height="24" image="B.png"/>
+<key x="285" y="180" width="40" height="40" sym="100" scancode="100">
+<label x="0" y="4" width="40" height="40" image="A.png"/>
 </key>
 
-<key x="209" y="190" width="32" height="32" sym="102" scancode="102">
-<label x="4" y="4" width="24" height="24" image="A.png"/>
+<key x="330" y="150" width="40" height="40" sym="102" scancode="102">
+<label x="4" y="4" width="40" height="40" image="A.png"/>
 </key>
 
-<key x="0" y="0" width="25" height="25" sym="48" scancode="254"/>
+<key x="0" y="0" width="50" height="50" sym="48" scancode="254"/>
 <key x="218" y="0" width="25" height="25" sym="287" scancode="287"/>
 
 <key x="110" y="0" width="32" height="32" sym="286" scancode="286" image="save.png"/>

@@ -343,7 +343,7 @@ static void FreeBuffers()
 }
 //------
 
-uint8 PAL=0;
+uint8 PAL=1;
 
 static DECLFW(BRAML)
 {

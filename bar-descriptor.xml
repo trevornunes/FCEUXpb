@@ -9,16 +9,16 @@
 
     <!-- A universally unique application identifier. Must be unique across all BlackBerry Tablet OS applications.
          Using a reverse DNS-style name as the id is recommended. (Eg. com.example.ExampleApplication.) Required. -->
-    <id>com.example.FCEUXpb</id>
+    <id>com.example.FCEUX</id>
 
     <!-- The name that is displayed in the BlackBerry Tablet OS application installer. 
          May have multiple values for each language. See samples or xsd schema file. Optional. -->
-    <name>FCEUXpb</name>
+    <name>FCEUX</name>
     
     <!-- A string value of the format <0-999>.<0-999>.<0-999> that represents application version which can be used to check for application upgrade. 
          Values can also be 1-part or 2-part. It is not necessary to have a 3-part value.
          An updated version of application must have a versionNumber value higher than the previous version. Required. -->
-    <versionNumber>1.0.1</versionNumber>
+    <versionNumber>1.10.3</versionNumber>
     <buildId>1</buildId>
 
     <!-- Fourth digit segment of the package version. First three segments are taken from the 
@@ -37,18 +37,22 @@
     <!--  Name of author which is used for signing. Must match the developer name of your development certificate. -->
     <author>t</author>
     <authorId>gYAAgOKRaqVbNM5ToziNoZFV720</authorId>
-    <splashscreen>nes.png</splashscreen>
+    <platformVersion>10.0.9.386</platformVersion>
     
     <!--  Unique author ID assigned by signing authority. Required if using debug tokens. -->
     <!-- <authorId>ABC1234YjsnUk235h</authorId> -->
    
     <initialWindow>
+        <aspectRatio>landscape</aspectRatio>
+        <autoOrients>false</autoOrients>
         <systemChrome>none</systemChrome>
         <transparent>false</transparent>
     </initialWindow>
     
     <!--  The category where the application appears. Either core.games or core.media. -->
-    <category>core.media</category>
+    <category>core.games</category>
+    <permission>access_internet</permission>
+    <permission>access_shared</permission>
     <asset path="fceux.png">fceux.png</asset>
     <asset path="sdl-controls.xml">sdl-controls.xml</asset>
     <asset path="media/A.png">A.png</asset>
@@ -57,8 +61,6 @@
     <asset path="media/start.png">start.png</asset>
     <asset path="media/fceux-icon.png">fceux-icon.png</asset>
     <asset path="media/nes.png">nes.png</asset>
-    <asset path="3rdparty/libs/libSDL12.so" type="Qnx/Elf">lib/libSDL12.so</asset>
-    <asset path="3rdparty/libs/libTouchControlOverlay.so" type="Qnx/Elf">lib/libTouchControlOverlay.so</asset>
     <asset path="media/save.png">save.png</asset>
     <asset path="media/load.png">load.png</asset>
     <asset path="media/dpad.png">dpad.png</asset>
@@ -67,6 +69,9 @@
     <asset path="media/3.png">3.png</asset>
     <asset path="media/4.png">4.png</asset>
     <asset path="media/0.png">0.png</asset>
+    <asset path="${workspace_loc:/SDL12/Device-Release/libSDL12.so}" type="Qnx/Elf">lib/libSDL12.so</asset>
+    <asset path="${workspace_loc:/TouchControlOverlay/Device-Release/libTouchControlOverlay.so}" type="Qnx/Elf">lib/libTouchControlOverlay.so</asset>
+    <asset path="${workspace_loc:/rom/Device-Release/librom.so}" type="Qnx/Elf">lib/librom.so</asset>
     <configuration id="com.qnx.qcc.configuration.exe.debug.821991146" name="Device-Debug">
        <platformArchitecture>armle-v7</platformArchitecture>
        <asset path="Device-Debug/FCEUXpb" entry="true" type="Qnx/Elf">FCEUXpb</asset>
@@ -105,11 +110,7 @@
     <!-- <splashscreen></splashscreen> -->
 
     <!-- Request permission to execute native code.  Required for native applications. -->
-    <action system="true">run_native</action>
-    <action>access_shared</action>
-    <action>access_internet</action>
-    <action>set_audio_volume</action>
-    <action>play_audio</action>
+
     
     <!--  The permissions requested by your application. -->
     <!--  <action>access_shared</action> -->

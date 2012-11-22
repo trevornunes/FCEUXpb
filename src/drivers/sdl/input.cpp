@@ -49,11 +49,7 @@ using namespace std;
 #endif
 
 #ifdef __QNXNTO__
-#include <dirent.h>
-#include <pthread.h>  // mutex
-#include <bps/dialog.h>
-#include <bps/bps.h>
-#include <bps/event.h>
+#include "rom.h"
 #include "touchcontroloverlay.h"  // tco_xxxx functions for touch input control
 #endif
 
@@ -63,168 +59,38 @@ extern Config *g_config;
 extern bool bindSavestate, frameAdvanceLagSkip, lagCounterDisplay;
 
 
-
 char g_runningFile_str[64];
-int gameIndex = 0;
-static vector<string> vsList;
-
 void ShowRomInfo()
 {
    char msg[128];
    memset( &msg[0], 0, 128);
-   sprintf( &msg[0], "%d/%d %s" , gameIndex, vsList.size(), g_runningFile_str );
+   sprintf( &msg[0], "%s", g_runningFile_str );
    FCEUI_DispMessage(msg,220);
 }
-//
-//
-//
-vector<string> GetRomDirListing( const char *dpath )
-{
- //vector<string> vsList;
 
-#ifdef __QNXNTO__
-	DIR* dirp;
-	struct dirent* direntp;
-#endif
 
-if(!dpath)
+
+
+Rom romp = Rom( Rom::rom_nes_c );
+
+void rombrowser_setup(void)
 {
-    fprintf(stderr,"dpath is null.\n");
-	return vsList;
+   romp.getRomList();
 }
 
-#ifdef __QNXNTO__
-
-  dirp = opendir( "/accounts/1000/shared/misc/roms/nes" );
-  if( dirp != NULL )
-  {
-	 for(;;)
-	 {
-		direntp = readdir( dirp );
-		if( direntp == NULL )
-		  break;
-
-		// fprintf(stderr,"FILE: '%s' \n", direntp->d_name);
-		// FCEUI_DispMessage(direntp->d_name,0);
-		  string tmp = direntp->d_name;
-
-		  if( strcmp( direntp->d_name, ".") == 0)
-		  {
-			 continue;
-		  }
-
-		  if( strcmp( direntp->d_name,"..") == 0)
-			  continue;
-
-		  if( (tmp.substr(tmp.find_last_of(".") + 1) == "nes") ||
-			  (tmp.substr(tmp.find_last_of(".") + 1) == "NES") )
-		  {
-	         // fprintf(stderr,"ROM: %s\n", direntp->d_name);
-			  vsList.push_back(direntp->d_name);
-		  }
-	 }
-  }
-  else
-  {
-	fprintf(stderr,"dirp is NULL ...\n");
-  }
-
-#endif
- fprintf(stderr,"number of files %d\n", vsList.size() );
-
- if(vsList.size() == 0) {
-
-	 dialog_instance_t alert_dialog = 0;
-	 dialog_request_events(0);    //0 indicates that all events are requested
-	 if (dialog_create_alert(&alert_dialog) != BPS_SUCCESS) {
-		 fprintf(stderr, "Failed to create alert dialog.");
-     //return EXIT_FAILURE;
-	 }
-	 dialog_set_title_text(alert_dialog, "FCEUXpb Error Report");
-	 if (dialog_set_alert_html_message_text(alert_dialog, "<u><b>ERROR:</b> You do not have any ROMS!<br></u><b>Add NES ROMS to:</b> <br><u>\"shared/misc/roms/nes\"</u><br>using either <i>WiFi sharing</i> or <i>Desktop Software.</i>")
-			 != BPS_SUCCESS) {
-		 fprintf(stderr, "Failed to set alert dialog message text.");
-		 dialog_destroy(alert_dialog);
-		 alert_dialog = 0;
-       //return EXIT_FAILURE;
-	 }
-
-	 char* cancel_button_context = "Cancelled";
-
-	 if (dialog_add_button(alert_dialog, "OK", true, 0, true)
-			 != BPS_SUCCESS) {
-		 fprintf(stderr, "Failed to add button to alert dialog.");
-		 dialog_destroy(alert_dialog);
-		 alert_dialog = 0;
-       //return EXIT_FAILURE;
-	 }
-
-	 if (dialog_show(alert_dialog) != BPS_SUCCESS) {
-		 fprintf(stderr, "Failed to show alert dialog.");
-		 dialog_destroy(alert_dialog);
-		 alert_dialog = 0;
-		 //return EXIT_FAILURE;
-	 }
-
-	 while (1) {
-		 bps_event_t *event = NULL;
-		 bps_get_event(&event, -1);    // -1 means that the function waits
-                                   // for an event before returning
-
-		 if (event) {
-			 if (bps_event_get_domain(event) == dialog_get_domain()) {
-
-				 int selectedIndex =
-						 dialog_event_get_selected_index(event);
-				 const char* label =
-						 dialog_event_get_selected_label(event);
-				 const char* context =
-						 dialog_event_get_selected_context(event);
-
-				 exit(-1);
-			 }
-		 }
-	 }
-
-	 if (alert_dialog) {
-		 dialog_destroy(alert_dialog);
-	 }
- }
-	 return vsList;
+const char *rombrowser_next(void)
+{
+	return romp.getRomNext();
 }
 
-
-
-#ifdef __QNXNTO__
-static pthread_mutex_t loader_mutex = PTHREAD_MUTEX_INITIALIZER;
-static vector<string> vecList;
-static vector<string> sortedvecList;
-#endif
-
-//
-//
-//
-vector<string> sortAlpha(vector<string> sortThis)
+const char *rombrowser_get_rom_name(void)
 {
-     int swap;
-     string temp;
+	return romp.getActiveRomName().c_str();
+}
 
-     do
-     {
-         swap = 0;
-         for (int count = 0; count < sortThis.size() - 1; count++)
-         {
-             if (sortThis.at(count) > sortThis.at(count + 1))
-             {
-                   temp = sortThis.at(count);
-                   sortThis.at(count) = sortThis.at(count + 1);
-                   sortThis.at(count + 1) = temp;
-                   swap = 1;
-             }
-         }
-     }while (swap != 0);
-
-     return sortThis;
+int rombrowser_rom_count(void)
+{
+	return romp.romCount();
 }
 
 
@@ -233,98 +99,21 @@ int AutoLoadRom(void)
    // static int gameIndex;
 	int status = 0;
 
-	    pthread_mutex_lock(&loader_mutex);
-	    const char ** list = 0;
-	    int count = 0;
-	    list = (const char**)malloc(sortedvecList.size()*sizeof(char*));
+	fprintf(stderr, "AutoLoadRom\n");
 
 
-
-	    for(;;){
-	    	if(count >= sortedvecList.size()) break;
-	    	fprintf(stderr, "%d \n", count);
-	    	list[count] = sortedvecList[count].c_str();
-	    	count++;
-	    }
-
-	    // ROM selector
-	       dialog_instance_t dialog = 0;
-	       int i, rc;
-	       bps_event_t *event;
-	       int domain = 0;
-	       const char * label;
-	       char romfilename[256];
-	       dialog_create_popuplist(&dialog);
-	       dialog_set_popuplist_items(dialog, list, sortedvecList.size());
-
-	           char* cancel_button_context = "Canceled";
-	           char* okay_button_context = "Okay";
-	           dialog_add_button(dialog, DIALOG_CANCEL_LABEL, true, cancel_button_context, true);
-	           dialog_add_button(dialog, DIALOG_OK_LABEL, true, okay_button_context, true);
-	           dialog_set_popuplist_multiselect(dialog, false);
-	           dialog_show(dialog);
-
-	           while(1){
-	               bps_get_event(&event, -1);
-
-	               if (event) {
-	                   domain = bps_event_get_domain(event);
-	                   if (domain == dialog_get_domain()) {
-	                       int *response[1];
-	                       int num;
-
-	                       label = dialog_event_get_selected_label(event);
-
-	                       if(strcmp(label, DIALOG_OK_LABEL) == 0){
-	                           dialog_event_get_popuplist_selected_indices(event, (int**)response, &num);
-	                           if(num != 0){
-	                               //*response[0] is the index that was selected
-	                               printf("%s", list[*response[0]]);fflush(stdout);
-	                               strcpy(romfilename, list[*response[0]]);
-	                               gameIndex = (*response[0] + 1);
-	                           }
-	                           bps_free(response[0]);
-	                       } else {
-	                           printf("User has canceled ISO dialog.");
-	                           return false;
-	                       }
-	                       break;
-	                   }
-	               }
-	           }
-
-
-
-
-	if( sortedvecList.size() == 0)
-	{
-	   fprintf(stderr,"AutoLoadRom: error no games in vecList\n");
-	   return -1;
-	}
-
-	fprintf(stderr,"AutoLoadRom\n");
-    string baseDir ="/accounts/1000/shared/misc/roms/nes/";
-
-    memset(&g_runningFile_str[0],0,64);
-    sprintf(&g_runningFile_str[0], romfilename);
-
-    baseDir = baseDir + romfilename;
-    fprintf(stderr,"loading: %d/%d '%s'\n",count, sortedvecList.size(), baseDir.c_str() );
 
    bool paused = FCEUI_EmulationPaused();
    if(!paused)
  	    FCEUI_ToggleEmulationPause();
 
    FCEUI_CloseGame();
-   status = LoadGame( baseDir.c_str() );
+   status = LoadGame( rombrowser_next() );
 
    if( status == 0)
    {
-     fprintf(stderr,"BAD ROM?: id=%d file='%s'\n", gameIndex, g_runningFile_str );
+     fprintf(stderr,"BAD ROM?: file='%s'\n", g_runningFile_str );
    }
-
-   pthread_mutex_unlock(&loader_mutex);  // -lpthread normally would be added, it's already in PB runtime.
-   free(list);
 
    return status;
 
@@ -332,8 +121,7 @@ int AutoLoadRom(void)
 
 void UpdateRomList(void)
 {
-  vecList = GetRomDirListing("/accounts/1000/shared/misc/roms/nes");
-  sortedvecList = sortAlpha(vecList);
+  rombrowser_setup();
 }
 
 
