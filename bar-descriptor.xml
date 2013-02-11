@@ -18,7 +18,7 @@
     <!-- A string value of the format <0-999>.<0-999>.<0-999> that represents application version which can be used to check for application upgrade. 
          Values can also be 1-part or 2-part. It is not necessary to have a 3-part value.
          An updated version of application must have a versionNumber value higher than the previous version. Required. -->
-    <versionNumber>1.10.3</versionNumber>
+    <versionNumber>1.10.5</versionNumber>
     <buildId>1</buildId>
 
     <!-- Fourth digit segment of the package version. First three segments are taken from the 
@@ -37,7 +37,7 @@
     <!--  Name of author which is used for signing. Must match the developer name of your development certificate. -->
     <author>t</author>
     <authorId>gYAAgOKRaqVbNM5ToziNoZFV720</authorId>
-    <platformVersion>10.0.9.386</platformVersion>
+    <platformVersion>10.0.9.2318</platformVersion>
     
     <!--  Unique author ID assigned by signing authority. Required if using debug tokens. -->
     <!-- <authorId>ABC1234YjsnUk235h</authorId> -->
@@ -71,7 +71,8 @@
     <asset path="media/0.png">0.png</asset>
     <asset path="${workspace_loc:/SDL12/Device-Release/libSDL12.so}" type="Qnx/Elf">lib/libSDL12.so</asset>
     <asset path="${workspace_loc:/TouchControlOverlay/Device-Release/libTouchControlOverlay.so}" type="Qnx/Elf">lib/libTouchControlOverlay.so</asset>
-    <asset path="${workspace_loc:/rom/Device-Release/librom.so}" type="Qnx/Elf">lib/librom.so</asset>
+    <asset path="${workspace_loc:/rom/Device-Debug/librom.so}" type="Qnx/Elf">lib/librom.so</asset>
+    <asset path="media/nescart.png">nescart.png</asset>
     <configuration id="com.qnx.qcc.configuration.exe.debug.821991146" name="Device-Debug">
        <platformArchitecture>armle-v7</platformArchitecture>
        <asset path="Device-Debug/FCEUXpb" entry="true" type="Qnx/Elf">FCEUXpb</asset>

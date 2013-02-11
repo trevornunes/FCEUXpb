@@ -163,9 +163,9 @@ InitConfig()
     config->addOption("slend", "SDL.ScanLineEnd", 239);
 
     // video controls
-    config->addOption('x', "xres", "SDL.XResolution", 512);
-    config->addOption('y', "yres", "SDL.YResolution", 448);
-    config->addOption('f', "fullscreen", "SDL.Fullscreen", 0);
+    config->addOption('x', "xres", "SDL.XResolution", 1280);
+    config->addOption('y', "yres", "SDL.YResolution", 768);
+    config->addOption('f', "fullscreen", "SDL.Fullscreen", 1);
     config->addOption('b', "bpp", "SDL.BitsPerPixel", 32);
     config->addOption("doublebuf", "SDL.DoubleBuffering", 0);
     config->addOption("autoscale", "SDL.AutoScale", 1);

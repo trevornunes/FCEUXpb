@@ -50,8 +50,9 @@
 #include <windows.h>
 #endif
 
-
-
+#ifdef __QNXNTO__
+#include "rom.h"
+#endif
 
 extern double g_fpsScale;
 
@@ -584,11 +585,6 @@ char *g_rom_default_game = "/accounts/1000/shared/roms/nes/game.nes";
  */
 int main(int argc, char *argv[])
 {
-	bps_initialize();
-	dialog_request_events(0);
-
-	// Create ROMS dir.
-	mkdir("/accounts/1000/shared/misc/roms/nes", 0777);
 
   // this is a hackish check for the --help arguemnts
   // these are normally processed by the config parser, but SDL_Init
@@ -815,8 +811,11 @@ int main(int argc, char *argv[])
 #endif
 	}
 #endif
-	
 
+
+
+
+	fprintf(stderr,"UpdateEMUCore\n");
 	// update the emu core
 	UpdateEMUCore(g_config);
 
@@ -881,8 +880,10 @@ int main(int argc, char *argv[])
 		g_config->save();
 	}
 #else
+#ifdef __QNXNTO__
+	rombrowser_setup( emu_nes_c );
+#endif
 	extern void AutoLoadRom(void);  // sick ... fix me.
-	UpdateRomList();
 	AutoLoadRom();
 #endif
 	

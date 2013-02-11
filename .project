@@ -3,6 +3,7 @@
 	<name>FCEUXpb</name>
 	<comment></comment>
 	<projects>
+		<project>rom</project>
 		<project>SDL12</project>
 		<project>TouchControlOverlay</project>
 	</projects>

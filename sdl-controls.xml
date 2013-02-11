@@ -1,37 +1,40 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <emulation version="1">
 
-<dpad x="2" y="140" height="80" width="80">
-<label x="0" y="0"  height="80" width="80" image="dpad.png"/>
+<dpad x="0" y="480" height="240" width="240">
+<label x="0" y="0"  height="240" width="240" image="dpad.png"/>
 </dpad>
 
-
-<key x="335" y="35" width="40" height="40" sym="115" scancode="115">
-<label x="0" y="0" width="40" height="22" image="select.png"/>
+<key x="950" y="600" width="100" height="100" sym="100" scancode="100">
+<label x="0" y="0" width="100" height="100" image="A.png"/>
 </key>
 
-<key x="335" y="85" width="40" height="40" sym="13" scancode="13">
-<label x="0" y="0" width="40" height="22" image="start.png"/>
+<key x="1100" y="550" width="100" height="100" sym="102" scancode="102">
+<label x="0" y="0" width="100" height="100" image="A.png"/>
 </key>
 
-<key x="285" y="180" width="40" height="40" sym="100" scancode="100">
-<label x="0" y="4" width="40" height="40" image="A.png"/>
+<key x="400" y="640" width="80" height="40" sym="115" scancode="115">
+<label x="0" y="0" width="80" height="40" image="select.png"/>
 </key>
 
-<key x="330" y="150" width="40" height="40" sym="102" scancode="102">
-<label x="4" y="4" width="40" height="40" image="A.png"/>
+<key x="590" y="640" width="80" height="40" sym="13" scancode="13">
+<label x="0" y="0" width="80" height="40" image="start.png"/>
 </key>
 
-<key x="0" y="0" width="50" height="50" sym="48" scancode="254"/>
-<key x="218" y="0" width="25" height="25" sym="287" scancode="287"/>
 
-<key x="110" y="0" width="32" height="32" sym="286" scancode="286" image="save.png"/>
-<key x="150" y="0" width="32" height="32" sym="288" scancode="288" image="load.png"/>
+<key x="0" y="0" width="80" height="80" sym="48" scancode="254">
+<label x="0" y="0" width="80" height="80" image="nescart.png"/>
+</key>
+
+<key x="0" y="140" width="80" height="80" sym="287" scancode="287"/>
+
+<key x="1100" y="0" width="80" height="80" sym="286" scancode="286" image="save.png"/>
+<key x="1180" y="0" width="80" height="80" sym="288" scancode="288" image="load.png"/>
 
 
-<key x="56" y="0" width="16" height="16" sym="49" scancode="49" image="0.png"/>
-<key x="72" y="0" width="16" height="16" sym="50" scancode="50" image="1.png"/>
-<key x="56" y="20" width="16" height="16" sym="51" scancode="51" image="2.png"/>
-<key x="72" y="20" width="16" height="16" sym="52" scancode="52" image="3.png"/>
+<key x="200" y="0" width="80" height="80" sym="49" scancode="49" image="0.png"/>
+<key x="280" y="0" width="80" height="80" sym="50" scancode="50" image="1.png"/>
+<key x="200" y="80" width="80" height="80" sym="51" scancode="51" image="2.png"/>
+<key x="280" y="80" width="80" height="80" sym="52" scancode="52" image="3.png"/>
 
 </emulation>

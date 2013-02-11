@@ -203,11 +203,6 @@ InitVideo(FCEUGI *gi)
     s_inited = 1;
 
 
-#ifndef __QNXNTO__
-    // shows the cursor within the display window
-    SDL_ShowCursor(1);
-#endif
-
     // determine if we can allocate the display on the video card
     vinf = SDL_GetVideoInfo();
     if(vinf->hw_available) {
@@ -218,13 +213,16 @@ InitVideo(FCEUGI *gi)
     if(s_nativeWidth < 0) {
     	s_nativeWidth = vinf->current_w;
     }
+
     if(s_nativeHeight < 0) {
     	s_nativeHeight = vinf->current_h;
     }
     
     // check if we are rendering fullscreen
 
-
+#ifdef __QNXNTO__
+      fprintf(stderr,"native screen info: x=%d y=%d\n", s_nativeWidth, s_nativeHeight);
+#endif
     if(s_fullscreen) {
         flags |= SDL_FULLSCREEN;
         SDL_ShowCursor(0);
@@ -340,6 +338,7 @@ InitVideo(FCEUGI *gi)
         							s_useOpenGL ? s_nativeHeight : yres,
         							desbpp, flags);
 #else
+        fprintf(stderr,"SDL_SetVideoMode: %d %d %d\n", xres, yres, desbpp);
         s_screen = SDL_SetVideoMode(xres, yres, desbpp, flags);
 #endif
 
@@ -354,7 +353,8 @@ InitVideo(FCEUGI *gi)
         g_config->getOption("SDL.XScale", &s_exs);
         g_config->getOption("SDL.YScale", &s_eys);
         g_config->getOption("SDL.SpecialFX", &s_eefx);
-        
+
+
         // -Video Modes Tag-
         if(s_sponge) {
             if(s_sponge >= 4) {

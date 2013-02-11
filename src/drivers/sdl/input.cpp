@@ -71,27 +71,6 @@ void ShowRomInfo()
 
 
 
-Rom romp = Rom( Rom::rom_nes_c );
-
-void rombrowser_setup(void)
-{
-   romp.getRomList();
-}
-
-const char *rombrowser_next(void)
-{
-	return romp.getRomNext();
-}
-
-const char *rombrowser_get_rom_name(void)
-{
-	return romp.getActiveRomName().c_str();
-}
-
-int rombrowser_rom_count(void)
-{
-	return romp.romCount();
-}
 
 
 int AutoLoadRom(void)
@@ -121,7 +100,7 @@ int AutoLoadRom(void)
 
 void UpdateRomList(void)
 {
-  rombrowser_setup();
+  rombrowser_update();
 }
 
 
